@@ -15,7 +15,6 @@ class PortfolioItems extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = getState();
     this.onChange = this.onChange.bind(this);
   }

@@ -8,9 +8,9 @@ const Header = () => {
         <div className="container">
           <nav>
             <ul>
-              <li>
+             {/*<li>
                 <IndexLink to="/">Home</IndexLink>
-              </li>
+              </li>*/}
               <li>
                 <Link to="/portfolioItems">Portfolio Items</Link>
               </li>

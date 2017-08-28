@@ -58,6 +58,21 @@ function getJsonContent(relativeUrl, options) {
         return localForage.getItem(options["system.type"]).then(function (value) {
             if (value != null) {
                 console.log('accessed items from offline storage', value);
+
+                //if a specific item was requested
+                //loop through and find the item in our values and return it
+                if (options["elements.friendly_url"]) {
+                    var storedItems = value.items;
+                    for (var i = 0; i < value.items.length; i++) {
+                        //if the friendly url is the same as the item requested
+                        //sort that item to be the first in our value's items array.
+                        if (value.items[i].elements.friendly_url.value == options["elements.friendly_url"]) {
+                            var first = options["elements.friendly_url"];
+                            value.items.sort(function (x, y) { return x.elements.friendly_url.value == first ? -1 : y.elements.friendly_url.value == first ? 1 : 0; });                            
+                        }
+                    }
+                }
+
                 return value;
             }
         }).catch(function (err) {

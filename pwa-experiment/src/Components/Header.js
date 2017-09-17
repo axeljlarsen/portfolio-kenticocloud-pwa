@@ -8,24 +8,9 @@ const Header = () => {
         <div className="container">
           <nav>
             <ul>
-             {/*<li>
-                <IndexLink to="/">Home</IndexLink>
-              </li>*/}
               <li>
                 <Link to="/portfolioItems">Portfolio Items</Link>
               </li>
-              {/* <li>
-                <Link to="/store">Product catalog</Link>
-              </li>
-              <li>
-                <Link to="/articles">Articles</Link>
-              </li>
-              <li>
-                <Link to="/about">About us</Link>
-              </li>
-              <li>
-                <Link to="/cafes">Cafes</Link>
-              </li> */}
             </ul>
           </nav>
         </div>

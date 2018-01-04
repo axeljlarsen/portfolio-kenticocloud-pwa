@@ -1,0 +1,14 @@
+.portfolioItem {
+    background: $white;
+    color: $primary;
+    @extend .col-xs-12;
+    @extend .col-sm-6;
+    @extend .col-xl-3;
+
+    .portfolioItem-tile-date {
+        padding: 0 1em;
+    }
+    .portfolioItem-tile-content {
+        padding: 0 1em;
+    }
+}

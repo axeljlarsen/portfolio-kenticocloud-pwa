@@ -1,0 +1,41 @@
+@mixin btn($color,$bg) {
+    @include btn($color,$bg,$color,$bg,$color,$bg);
+}
+@mixin btn($color,$bg,$hover-color,$hover-bg,$active-color,$active-bg) {    
+    border-color: $color;
+    color: $color;
+    background: $bg;
+
+    &:hover, &:focus {
+        border-color: $hover-color;
+        color: $hover-color;
+        background: $hover-bg;
+    }
+    &:active {
+        color: $active-color;
+        background: $active-bg;
+    }
+}
+
+@mixin col($screen-abbr,$width) {
+    .col-#{$screen-abbr}-#{$width} {
+        float: left;
+        width: ($width/$grid-base) * 100%;
+    }  
+}
+@mixin screenSizeQuery($screen-abbr, $screen-size) {
+    @media (min-width: $screen-size) {
+        @include col($screen-abbr,1);
+        @include col($screen-abbr,2);
+        @include col($screen-abbr,3);
+        @include col($screen-abbr,4);
+        @include col($screen-abbr,5);
+        @include col($screen-abbr,6);
+        @include col($screen-abbr,7);
+        @include col($screen-abbr,8);
+        @include col($screen-abbr,9);
+        @include col($screen-abbr,10);
+        @include col($screen-abbr,11);
+        @include col($screen-abbr,12);
+    }
+}

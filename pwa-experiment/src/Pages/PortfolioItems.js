@@ -7,7 +7,7 @@ let portfolioItemCount = 10;
 
 let getState = () => {
   return {
-    portfolioItems: PortfolioItemStore.getPortfolioItems(portfolioItemCount)
+    portfolioItems: PortfolioItemStore.getItems(portfolioItemCount)
   };
 };
 
@@ -21,7 +21,7 @@ class PortfolioItems extends Component {
 
   componentDidMount() {
     PortfolioItemStore.addChangeListener(this.onChange);
-    PortfolioItemStore.providePortfolioItems(portfolioItemCount);
+    PortfolioItemStore.provideItems(portfolioItemCount);
   }
 
   componentWillUnmount() {
@@ -34,30 +34,32 @@ class PortfolioItems extends Component {
 
   render() {
     let formatDate = (value) => {
-      return dateFormat(value, "mmmm d");
+      return dateFormat(value, 'mmmm d');
     };
 
     let counter = 0;
 
     let portfolioItems = this.state.portfolioItems.reduce((result, portfolioItem, index) => {
-      if (index % 4 === 0) {
+      if (index % 3 === 0) {
         result.push(
           <div className="clear" key={counter++}></div>
         );
       }
 
-      let e = portfolioItem.elements;
+      let e = portfolioItem;
       let title = e.title.value;
-      let imageLink = e.thumbnail_image.value[0].url;
-      let postDate = formatDate(e.post_date.value);
+      let imageUrl = (e && e.thumbnailImage && e.thumbnailImage.value && e.thumbnailImage.value.length > 0 && e.thumbnailImage.value[0].url) ? e.thumbnailImage.value[0].url : '';
+      let postDate = formatDate(e.launchDate.value);
       let summary = e.description.value;
-      let link = "/portfolioItems/" + portfolioItem.elements.friendly_url.value;
+      let link = '/portfolioItems/' + portfolioItem.friendlyURL.value;
+
+      let features = portfolioItem.features;
 
       result.push(
-        <div className="col-md-3" key={counter++}>
+        <div className="col-md-4" key={counter++}>
           <div className="portfolioItem-tile">
             <Link to={link}>
-              <img alt={"PortfolioItem " + title} className="portfolioItem-tile-image" src={imageLink} title={"PortfolioItem " + title} />
+              <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
             </Link>
             <div className="portfolioItem-tile-date">
                {postDate} 

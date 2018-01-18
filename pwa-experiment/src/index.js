@@ -14,7 +14,7 @@ ReactDOM.render((
         <Route path="/" component={App}>
             <IndexRoute component={PortfolioItemsPage} />
             <Route path="portfolioItems" component={PortfolioItemsPage} />
-            <Route path="portfolioItems/:portfolioItemSlug" component={PortfolioItemPage} />
+            <Route path="portfolioItems/:urlSlug" component={PortfolioItemPage} />
         </Route>
     </Router>
 ), document.getElementById("root"));

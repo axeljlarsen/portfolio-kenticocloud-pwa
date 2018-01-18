@@ -1,13 +1,16 @@
 import Client from "../Client.js";
-import localForage from "localforage";
+import localforage from "localforage";
 
-let portfolioItemList = [];
-let portfolioItemListCapacity = 0;
+let systemType = "portfolio_item";
+let itemList = [];
+let itemListCapacity = 0;
 
-let portfolioItemDetails = {};
-let portfolioItemDetailsPromises = {};
+let itemDetails = {};
+let itemDetailsPromises = {};
+
 
 let changeListeners = [];
+let initialized = false;
 
 let notifyChange = () => {
     changeListeners.forEach((listener) => {
@@ -18,55 +21,109 @@ let notifyChange = () => {
 class PortfolioItemStore {
 
     // Actions
-    providePortfolioItem(portfolioItemSlug) {
-        if (portfolioItemDetailsPromises[portfolioItemSlug]) {
-            return;
-        }
 
-        portfolioItemDetailsPromises[portfolioItemSlug] = Client.getItems({
-            "system.type": "portfolio_item",
-            "elements.friendly_url": portfolioItemSlug
-        }).then((response) => {
-            if (response.items.length > 0) {
-                portfolioItemDetails[portfolioItemSlug] = response.items[0];
-                notifyChange();
+    getItemFromStorage(urlSlug) {
+
+        //Access offline storage and assign items to Portfolio Item details list
+        localforage.getItem(systemType).then(function (value) {
+            if (value != null) {
+                console.log('accessed items from offline storage', value);
+
+                //if a specific item was requested
+                //loop through and find the item in our values and return it
+                if (urlSlug) {
+                    var storedItems = JSON.parse(value);
+                    for (var i = 0; i < storedItems.length; i++) {
+                        //if the friendly url is the same as the item requested
+                        //sort that item to be the first in our value's items array.
+                        if (storedItems[i].friendlyURL.value == urlSlug) {
+                            var first = urlSlug;
+                            storedItems.sort(function (x, y) { return x.friendlyURL.value == first ? -1 : y.friendlyURL.value == first ? 1 : 0; });
+                        }
+                    }
+                }
+
+                return storedItems[0];
             }
         }).catch(function (err) {
-            console.log(err);
+            console.log('failed to access items from offline storage', err);
         });
-
     }
 
-    providePortfolioItems(count) {
-        if (count <= portfolioItemListCapacity) {
+    setItemsToStorage(items) {
+        var uniqueObjs = [];
+        var jsonObj = JSON.stringify(items, function (key, value) {
+            if (typeof value === 'object' && value !== null) {
+                if (uniqueObjs.indexOf(value) !== -1) {
+                    // Circular reference found, discard key
+                    return;
+                }
+                // Store value in our collection
+                uniqueObjs.push(value);
+            }
+            return value;
+        });
+        uniqueObjs = null; // Enable garbage collection
+
+        localforage.setItem(systemType, jsonObj).then(function () {
+        }).then(function (value) {
+            // we got our value
+            console.log('set', value);
+        }).catch(function (err) {
+            // we got an error
+            console.log(err);
+        });
+    }
+
+    provideItem(urlSlug) {
+
+        if (itemDetailsPromises[urlSlug]) {
             return;
         }
 
-        portfolioItemListCapacity = count;
-        var systemtype = "portfolio_item";
+        itemDetailsPromises[urlSlug] = Client.items()
+            .type(systemType)
+            .equalsFilter('elements.friendly_url', urlSlug)
+            .orderParameter('system.name')
+            .get()
+            .subscribe(response => {
+                if (response.items.length > 0) {
+                    itemDetails[urlSlug] = response.firstItem;
+                    notifyChange();
+                    initialized = true;
+                    this.getItemFromStorage(urlSlug);
+                }
+            });
+    }
 
-        Client.getItems({
-            "system.type": systemtype,
-            "elements": "title,thumbnail_image,post_date,description,friendly_url",
-            "order": "elements.post_date[DESC]"
-        }).then((response) => {            
-            if (response.items.length > 0) {
-                portfolioItemList = response.items;
-                notifyChange();
-            }
-        }).catch(function (err) {
-            console.log(err);
-        });
+    provideItems(count) {
+        if (count <= itemListCapacity || itemList.length > 0) {
+            return;
+        }
+
+        itemListCapacity = count;
+
+        itemList = Client.items()
+            .type(systemType)
+            .get()
+            .subscribe(response => {
+                if (response.items.length > 0) {
+                    itemList = response.items;
+                    notifyChange();
+                    initialized = true;
+                    this.setItemsToStorage(itemList);
+                }
+            });
     }
 
     // Methods
 
-    getPortfolioItem(portfolioItemSlug) {
-        return portfolioItemDetails[portfolioItemSlug];
+    getItem(urlSlug) {
+        return itemDetails[urlSlug];
     }
 
-    getPortfolioItems(count) {
-        return portfolioItemList.slice(0, count);
+    getItems(count) {
+        return itemList.slice(0, count);
     }
 
     // Listeners

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Router, browserHistory, Route, Link } from 'react-router';
 import Header from './Components/Header.js';
 import logo from './logo.svg';
-import './App.css';
+import './Styles/App.css'; 
 
 const Page = ({ title }) => (
     <div className="App">

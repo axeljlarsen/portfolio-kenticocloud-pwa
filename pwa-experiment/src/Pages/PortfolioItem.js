@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PortfolioItemStore from '../Stores/PortfolioItem';
+import LinkButton from '../Components/LinkButton';
 import RichTextElement from '../Components/RichTextElement';
+import SkylineClientCard   from '../Components/SkylineClientCard';
 import dateFormat from 'dateformat';
 
 let getState = (props) => {
   return {
-    portfolioItem: PortfolioItemStore.getPortfolioItem(props.params.portfolioItemSlug)
+    portfolioItem: PortfolioItemStore.getItem(props.params.urlSlug)
   };
 };
 
@@ -20,7 +22,7 @@ class PortfolioItem extends Component {
 
   componentDidMount() {
     PortfolioItemStore.addChangeListener(this.onChange);
-    PortfolioItemStore.providePortfolioItem(this.props.params.portfolioItemSlug);
+    PortfolioItemStore.provideItem(this.props.params.urlSlug);
   }
 
   componentWillUnmount() {
@@ -44,28 +46,36 @@ class PortfolioItem extends Component {
       return dateFormat(value, "dddd, mmmm d, yyyy");
     };
 
-    let e = portfolioItem.elements;
+    let e = portfolioItem;
     let title = e.title.value;
-    let imageLink = e.thumbnail_image.value[0].url;
-    let postDate = formatDate(e.post_date.value);
-    let bodyCopyElement = e.description;
+    let imageUrl = e.thumbnailImage.value[0].url;
+    let postDate = formatDate(e.launchDate.value);
+    let bodyCopyElement = e.description.value;
+    let clientInfo = e.client[0];
+    //let client = e.client.value;
 
     return (
       <div className="container">
-        <portfolioItem className="portfolioItem-detail col-lg-9 col-md-12 portfolioItem-detail-related-box">
+        <portfolioItem className="portfolioItem-detail col-xs-12 col-md-12 col-lg-9 portfolioItem-detail-related-box">
           <h2>{title}</h2>
           <div className="portfolioItem-detail-datetime">
              {postDate}
           </div>
           <div className="row">
-            <div className="portfolioItem-detail-image col-md-push-2 col-md-8">
-              <img alt={title} className="img-responsive" src={imageLink} title={title} />
+            <div className="portfolioItem-detail-image col-xs-12 col-md-push-2 col-md-8">
+              <img alt={title} className="img-responsive" src={imageUrl} title={title} />
             </div>
           </div>
           <div className="row">
             <RichTextElement className="portfolioItem-detail-content" element={bodyCopyElement} />
           </div>
+          <div className="row">
+          <div className="col-xs-12">
+          <SkylineClientCard client={clientInfo} />
+          </div>
+          </div>
         </portfolioItem>
+        <LinkButton link="/" text="Link Button"/>
       </div>
     );
   }

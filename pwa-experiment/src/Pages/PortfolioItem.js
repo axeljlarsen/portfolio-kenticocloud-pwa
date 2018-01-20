@@ -4,6 +4,9 @@ import LinkButton from '../Components/LinkButton';
 import RichTextElement from '../Components/RichTextElement';
 import SkylineClientCard from '../Components/SkylineClientCard';
 import dateFormat from 'dateformat';
+import sampleMonitorImage from '../Images/wmmb-eatwisconsincheese-imac.png';
+import samplePhoneImage from '../Images/wmmb-eatwisconsincheese-galaxys8.png';
+import sampleTabletImage from '../Images/wmmb-eatwisconsincheese-ipad.png';
 
 let getState = (props) => {
   return {
@@ -74,31 +77,41 @@ class PortfolioItem extends Component {
               <RichTextElement className="portfolioItem-detail-content" element={bodyCopyElement} />
             </div>
             <div className="col-4 col-sm-4 col-lg-3">
-              <ul>
-                <li><strong>Launch Date:</strong> {postDate}</li>
-                <li><strong>Project Timeline:</strong> {lengthOfEngagement}</li>
-                <li><strong>Industry:</strong> industry placeholder</li>
-              </ul>
-              <h3>Key Features</h3>
-              <ul>
-                {
-                  e.features.map((feature, index) => {
-                    let featureImageUrl = feature.icon.value[0].url;
-                    let featureImageDesc = feature.icon.value[0].description;
-                    return (
-                      <li key={index}>
-                        <img alt={featureImageDesc} className="img-responsive" src={featureImageUrl} title={featureImageDesc} />
-                        {feature.caption.value}
-                      </li>
-                    )
-                  })
-                }
-              </ul>
+              <div className="row bg-cube">
+                <div className="col-12 portfolioItem-detail-features">
+                  <ul className="list-unstyled">
+                    <li><strong>Launch Date:</strong> {postDate}</li>
+                    <li><strong>Project Timeline:</strong> {lengthOfEngagement}</li>
+                    <li><strong>Industry:</strong> industry placeholder</li>
+                  </ul>
+                  <h3 className="text-quaternary"><strong>Key Features</strong></h3>
+                  <table className="list-unstyled">
+                    <tbody>
+                      {
+                        e.features.map((feature, index) => {
+                          let featureImageUrl = feature.icon.value[0].url;
+                          let featureImageDesc = feature.icon.value[0].description;
+                          return (
+                            <tr key={index}>
+                              <td className="align-middle text-center">
+                                <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
+                              </td>
+                              <td>
+                                <span>{feature.caption.value}</span>
+                              </td>
+                            </tr>
+                          )
+                        })
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
           <div className="row bg-darkgray">
             <div className="col-12">
-              <h3>Technologies Used</h3>
+              <h3 className="text-tertiary">Technologies Used</h3>
               <div className="row">
                 {
                   e.technologies.map((technology, index) => {
@@ -106,7 +119,7 @@ class PortfolioItem extends Component {
                     let technologyImageDesc = technology.colorIcon.value[0].description;
                     return (
                       <div className="col-6 col-sm-4" key={index}>
-                        <img alt={technologyImageDesc} className="img-responsive" src={technologyImageUrl} title={technologyImageDesc} />
+                        <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
                         {
                           technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
                             return (
@@ -122,15 +135,15 @@ class PortfolioItem extends Component {
             </div>
 
             <div className="col-12">
-              <h3>Designed and Tested For</h3>
-              <div className="row">
+              <h3 className="text-primary"><small>Designed and Tested For</small></h3>
+              <div className="row text-gray">
                 {
                   e.testedPlatforms.map((technology, index) => {
                     let technologyImageUrl = technology.colorIcon.value[0].url;
                     let technologyImageDesc = technology.colorIcon.value[0].description;
                     return (
                       <div className="col-6 col-sm-4" key={index}>
-                        <img alt={technologyImageDesc} className="img-responsive" src={technologyImageUrl} title={technologyImageDesc} />
+                        <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
                         {
                           technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
                             return (
@@ -146,9 +159,30 @@ class PortfolioItem extends Component {
             </div>
           </div>
 
-          <div className="row">
-            <RichTextElement className="col-12" element={mainHighlightsHtml} />
+          <div className="row bg-alt-diagonal-primary">
+            <div className="col-12">            
+              <img src={sampleMonitorImage} alt="an iMac displaying the eatwisconsincheese.com website" />
+            </div>
+            <div className="col-12">
+              <div className="row">
+                <div className="col-4">
+                  Blah blah blah blah
+                </div>
+                <div className="col-4">
+                  <img src={samplePhoneImage} alt="a Samsung Galaxy S8 phone displaying the eatwisconsincheese.com website" />
+                </div>
+                <div className="col-4">
+                  Blah blah blah blah
+                </div>
+              </div>
+            </div>
+            <div className="col-12">            
+              <img src={sampleTabletImage} alt="an iPad displaying the eatwisconsincheese.com website" />
+            </div>
           </div>
+
+          
+          <RichTextElement className="" element={mainHighlightsHtml} />
 
           <SkylineClientCard client={clientInfo} id={"SkylineClient-" + clientInfo.codename} key={clientInfo.codename} />
 

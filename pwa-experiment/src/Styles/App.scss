@@ -1,14 +1,13 @@
 
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
-@import 'src/Styles/_Variables.scss';
 @import 'src/Styles/_Mixins.scss';
 @import 'src/Styles/Components/_Portfolio.scss'; 
-body {      
+body {       
   margin: 0;   
   padding: 0;   
   background: $gray-100; 
   color: $gray-1000; 
-}
+} 
 
 img {
   max-width: 100%;  
@@ -16,5 +15,94 @@ img {
    
 * {
   box-sizing: border-box;
-} 
+}  
 
+@mixin bg-alt-diagonal ($pos, $height, $color) {
+  > :nth-child(1n) {
+    padding-top: $height;
+    padding-bottom: $height;
+  }
+  > :nth-child(2n) {
+    position: relative;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: $color;
+
+     &:before {
+      content: ' ';
+      position: absolute;
+      right: 0;
+      top: -$height;    
+      width: 0; 
+      height: 0; 
+      border-left: 100vw solid transparent;
+      border-bottom: $height solid $color;
+    }
+    &:after {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      bottom:-$height;    
+      width: 0; 
+      height: 0; 
+      border-right: 100vw solid transparent;
+      border-top: $height solid $color;
+    }
+  }
+}
+.bg-cube {
+  background-image: url('../Images/bg-cube.png');
+  color: $secondary;
+}
+.bg-lightgray {
+  background-color: $gray-100;
+  color: $gray-1000;
+}
+.bg-darkgray {
+  background-color: $gray-1000;
+  color: $gray-100;
+}
+.bg-primary {
+  background-color: $primary;
+}
+.bg-alt-diagonal-primary {
+  @include bg-alt-diagonal(2n,10vh,$primary);
+}
+.bg-secondary {
+  background-color: $secondary;
+}
+.bg-tertiary {
+  background-color: $tertiary;
+}
+.bg-quaternary {
+  background-color: $quaternary;
+}
+
+.text-white {
+  color: $white !important;
+}
+.text-lightgray {
+  color: $gray-100 !important;
+}
+.text-gray {
+  color: $gray-600 !important;
+}
+.text-darkgray {
+  color: $gray-1000 !important;
+}
+.text-primary {
+  color: $primary !important;
+}
+.text-secondary {
+  color: $secondary !important;
+}
+.text-tertiary {
+  color: $tertiary !important; 
+}
+.text-quaternary {
+  color: $quaternary !important;
+}
+
+.icon {
+  max-height: 1em;
+}

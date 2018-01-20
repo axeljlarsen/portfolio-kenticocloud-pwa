@@ -1,3 +1,6 @@
+
+@import 'node_modules/bootstrap/scss/_variables.scss';
+
 .portfolioItem-detail {
     h1 {
         font-size: 2em;
@@ -9,6 +12,15 @@
     }
     h3 {
         font-size: 1.6em;
+    }
+    
+    .icon {
+         max-height: 1.5em;
+         margin-right: 0.5em;
+    }
+
+    .portfolioItem-detail-features {
+        font-weight: $font-weight-light;
     }
 }
   

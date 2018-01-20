@@ -1,13 +1,14 @@
 .portfolioItem-detail {
-    // @extend .col-xs-12;
-    // @extend .col-sm-6;
-    // @extend .col-xl-3;
-
-    .portfolioItem-detail-date {
-        padding: 0 1em;
+    h1 {
+        font-size: 2em;
+        color: $secondary;
     }
-    .portfolioItem-detail-content {
-        padding: 0 1em;
+    h2 {
+        font-size: 1.2em;
+        color: $secondary;
+    }
+    h3 {
+        font-size: 1.6em;
     }
 }
   

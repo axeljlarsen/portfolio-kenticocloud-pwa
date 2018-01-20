@@ -9,6 +9,8 @@ let itemDetailsPromises = {};
 
 let changeListeners = [];
 
+let initialized = false;
+
 let notifyChange = () => {
     changeListeners.forEach((listener) => {
         listener();

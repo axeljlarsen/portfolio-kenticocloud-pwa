@@ -15,12 +15,12 @@ export class PortfolioItem extends ContentItem {
                     return 'title';
                 }
 
-                if (fieldName === 'start_date') {
-                    return 'startDate';
+                if (fieldName === 'subtitle') {
+                    return 'subtitle';
                 }
 
-                if (fieldName === 'end_date') {
-                    return 'endDate';
+                if (fieldName === 'length_of_engagement') {
+                    return 'lengthOfEngagement';
                 }
 
                 if (fieldName === 'actual_launch_date') {

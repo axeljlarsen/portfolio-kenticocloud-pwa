@@ -3,24 +3,18 @@
 @import 'src/Styles/_Variables.scss';
 @import 'src/Styles/_Mixins.scss';
 @import 'src/Styles/Components/_Portfolio.scss'; 
-body {    
-  margin: 0; 
-  padding: 0;
-  font-family: sans-serif;  
-  background: $grey-1; 
-  color: $grey-12;
+body {      
+  margin: 0;   
+  padding: 0;   
+  background: $gray-100; 
+  color: $gray-1000; 
 }
 
 img {
-  max-width: 100%; 
+  max-width: 100%;  
 } 
-
+   
 * {
   box-sizing: border-box;
 } 
 
-@include screenSizeQuery('xs',$screen-xs);
-@include screenSizeQuery('sm',$screen-sm);
-@include screenSizeQuery('md',$screen-md);
-@include screenSizeQuery('lg',$screen-lg);
-@include screenSizeQuery('xl',$screen-xl); 

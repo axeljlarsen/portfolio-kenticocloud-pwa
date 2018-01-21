@@ -78,19 +78,22 @@ class PortfolioItemStore {
     provideItem(urlSlug) {
 
         if (itemDetailsPromises[urlSlug]) {
-            return;
+            return itemDetailsPromises[urlSlug];
         }
 
         itemDetailsPromises[urlSlug] = Client.items()
             .type(systemType)
             .equalsFilter('elements.friendly_url', urlSlug)
             .orderParameter('system.name')
+            .depthParameter(10)
             .get()
             .subscribe(response => {
                 if (response.items.length > 0) {
                     itemDetails[urlSlug] = response.firstItem;
                     notifyChange();
                     initialized = true;
+                }
+                else {
                     this.getItemFromStorage(urlSlug);
                 }
             });
@@ -98,19 +101,22 @@ class PortfolioItemStore {
 
     provideItems(count) {
         if (count <= itemListCapacity || itemList.length > 0) {
-            return;
+            return itemList;
         }
 
         itemListCapacity = count;
 
         itemList = Client.items()
             .type(systemType)
+            .depthParameter(10)
             .get()
             .subscribe(response => {
                 if (response.items.length > 0) {
                     itemList = response.items;
                     notifyChange();
                     initialized = true;
+                }
+                else {
                     this.setItemsToStorage(itemList);
                 }
             });

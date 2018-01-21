@@ -1,108 +1,133 @@
-
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'src/Styles/_Mixins.scss';
-@import 'src/Styles/Components/_Portfolio.scss'; 
-body {       
-  margin: 0;   
-  padding: 0;   
-  background: $gray-100; 
-  color: $gray-1000; 
-} 
+@import 'src/Styles/Components/_Portfolio.scss';
+body {
+    margin: 0;
+    padding: 0;
+    background: $gray-100;
+}
 
 img {
-  max-width: 100%;  
-} 
-   
-* {
-  box-sizing: border-box;
-}  
-
-@mixin bg-alt-diagonal ($pos, $height, $color) {
-  > :nth-child(1n) {
-    padding-top: $height;
-    padding-bottom: $height;
-  }
-  > :nth-child(2n) {
-    position: relative;
-    padding-top: 0;
-    padding-bottom: 0;
-    background-color: $color;
-
-     &:before {
-      content: ' ';
-      position: absolute;
-      right: 0;
-      top: -$height;    
-      width: 0; 
-      height: 0; 
-      border-left: 100vw solid transparent;
-      border-bottom: $height solid $color;
-    }
-    &:after {
-      content: ' ';
-      position: absolute;
-      left: 0;
-      bottom:-$height;    
-      width: 0; 
-      height: 0; 
-      border-right: 100vw solid transparent;
-      border-top: $height solid $color;
-    }
-  }
+    max-width: 100%;
 }
+
+* { 
+    box-sizing: border-box; 
+}
+
+@mixin bg-alt-diagonal ($pos, $height, $color1, $color2) {
+    > :first-child {
+        padding-top: $height;
+    }
+    > :last-child {
+        padding-bottom: $height;
+    }
+    > :nth-child(1n) {  
+        background-color: $color1;
+    } 
+    > :nth-child(2n) {
+        position: relative;
+        padding-top: $height;
+        padding-bottom: $height;  
+        overflow: hidden;
+        color: $color1;
+        background-color: $color2;
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+            padding-top: 0;   
+            padding-bottom: 0;
+        }
+        &:before {
+            content: ' ';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-right: 100vw solid transparent;
+            border-top: $height solid $color1;
+        }
+        &:after {
+            content: ' ';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 0;
+            border-left: 100vw solid transparent;
+            border-bottom: $height solid $color1;
+        }
+    }
+}
+
 .bg-cube {
-  background-image: url('../Images/bg-cube.png');
-  color: $secondary;
+    background-image: url('../Images/bg-cube.png');
 }
+
 .bg-lightgray {
-  background-color: $gray-100;
-  color: $gray-1000;
+    background-color: $gray-100;
+    color: $gray-1000;
 }
+
 .bg-darkgray {
-  background-color: $gray-1000;
-  color: $gray-100;
+    background-color: $gray-1000;
+    color: $gray-100;
 }
+
 .bg-primary {
-  background-color: $primary;
+    background-color: $primary;
 }
-.bg-alt-diagonal-primary {
-  @include bg-alt-diagonal(2n,10vh,$primary);
+
+.bg-alt-diagonal-white-primary {
+    @include bg-alt-diagonal(2n,
+    10vh,
+    $white,
+    $primary);
 }
+
 .bg-secondary {
-  background-color: $secondary;
+    background-color: $secondary;
 }
+
 .bg-tertiary {
-  background-color: $tertiary;
+    background-color: $tertiary;
 }
+
 .bg-quaternary {
-  background-color: $quaternary;
+    background-color: $quaternary;
 }
 
 .text-white {
-  color: $white !important;
+    color: $white !important;
 }
+
 .text-lightgray {
-  color: $gray-100 !important;
+    color: $gray-100 !important;
 }
+
 .text-gray {
-  color: $gray-600 !important;
+    color: $gray-600 !important;
 }
+
 .text-darkgray {
-  color: $gray-1000 !important;
+    color: $gray-1000 !important;
 }
+
 .text-primary {
-  color: $primary !important;
+    color: $primary !important;
 }
+
 .text-secondary {
-  color: $secondary !important;
+    color: $secondary !important;
 }
+
 .text-tertiary {
-  color: $tertiary !important; 
+    color: $tertiary !important;
 }
+
 .text-quaternary {
-  color: $quaternary !important;
+    color: $quaternary !important;
 }
 
 .icon {
-  max-height: 1em;
+    max-height: 1em;
 }

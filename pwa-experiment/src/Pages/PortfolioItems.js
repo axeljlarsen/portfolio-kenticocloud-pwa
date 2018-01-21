@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PortfolioItemStore from '../Stores/PortfolioItem';
 import { Link } from 'react-router'
 import dateFormat from 'dateformat';
+import RichTextElement from '../Components/RichTextElement';
 
 let portfolioItemCount = 10;
 
@@ -46,31 +47,29 @@ class PortfolioItems extends Component {
         );
       }
 
-      let e = portfolioItem;
-      let title = e.title.value;
-      let imageUrl = (e && e.thumbnailImage && e.thumbnailImage.value && e.thumbnailImage.value.length > 0 && e.thumbnailImage.value[0].url) ? e.thumbnailImage.value[0].url : '';
-      let postDate = formatDate(e.launchDate.value);
-      let summary = e.description.value;
+      let title = portfolioItem.title.value;
+      let imageUrl = portfolioItem.thumbnailImage.value[0].url || '';
+      let imageDesc = portfolioItem.thumbnailImage.value[0].description || '';
+      let postDate = formatDate(portfolioItem.launchDate.value);
+      let summary = portfolioItem.description;
       let link = '/portfolioItems/' + portfolioItem.friendlyURL.value;
 
       let features = portfolioItem.features;
 
       result.push(
-        <div className="col-md-4" key={counter++}>
+        <div className="col-120 col-sm-60 col-md-40 col-lg-30" key={counter++}>
           <div className="portfolioItem-tile">
             <Link to={link}>
               <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
             </Link>
             <div className="portfolioItem-tile-date">
-               {postDate} 
+              {postDate}
             </div>
             <div className="portfolioItem-tile-content">
               <h2 className="h4">
                 <Link to={link}>{title}</Link>
               </h2>
-              <p className="portfolioItem-tile-text">
-                {summary}
-              </p>
+              <RichTextElement className="portfolioItem-tile-text" element={summary} />
             </div>
           </div>
         </div>
@@ -81,7 +80,9 @@ class PortfolioItems extends Component {
 
     return (
       <div className="container">
-        {portfolioItems}
+        <div className="row bg-cube pt-5 pb-5">
+          {portfolioItems}
+        </div>
       </div>
     );
   }

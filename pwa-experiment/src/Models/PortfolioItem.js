@@ -63,12 +63,12 @@ export class PortfolioItem extends ContentItem {
                     return 'testedPlatforms';
                 }
 
-                if (fieldName === 'main_highlights_html') {
-                    return 'mainHighlightsHtml';
-                }
-
                 if (fieldName === 'friendly_url') {
                     return 'friendlyURL';
+                }
+
+                if (fieldName === 'device_sections') {
+                    return 'deviceSections';
                 }
 
             }),

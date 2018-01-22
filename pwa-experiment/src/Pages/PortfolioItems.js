@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PortfolioItemStore from '../Stores/PortfolioItem';
-import { Link } from 'react-router'
+import Link from '../Components/LowerCaseUrlLink';
 import dateFormat from 'dateformat';
 import RichTextElement from '../Components/RichTextElement';
 

@@ -4,13 +4,10 @@ import LinkButton from '../Components/LinkButton';
 import RichTextElement from '../Components/RichTextElement';
 import SkylineClientCard from '../Components/SkylineClientCard';
 import dateFormat from 'dateformat';
-import sampleMonitorImage from '../Images/wmmb-eatwisconsincheese-imac.png';
-import samplePhoneImage from '../Images/wmmb-eatwisconsincheese-galaxys8.png';
-import sampleTabletImage from '../Images/wmmb-eatwisconsincheese-ipad.png';
 
 let getState = (props) => {
   return {
-    portfolioItem: PortfolioItemStore.getItem(props.params.urlSlug)
+    portfolioItem: PortfolioItemStore.getItem(props.match.params.urlSlug)
   };
 };
 
@@ -25,7 +22,7 @@ class PortfolioItem extends Component {
 
   componentDidMount() {
     PortfolioItemStore.addChangeListener(this.onChange);
-    PortfolioItemStore.provideItem(this.props.params.urlSlug);
+    PortfolioItemStore.provideItem(this.props.match.params.urlSlug);
   }
 
   componentWillUnmount() {

@@ -11,22 +11,75 @@ img {
     max-width: 100%;
 }
 
-* { 
-    box-sizing: border-box; 
+* {
+    box-sizing: border-box;
 }
 
 nav {
-    background: $gray-1000;
+    background: $secondary;
+    box-shadow: inset 0 -1em 1em rgba(0, 0, 0, 0.1);
     ul {
+        display: flex;
+        align-items: flex-end;
+        align-content: flex-end;
         margin: auto;
     }
-    li {
-        display: inline-block;
-        margin-right: 1em;
-        padding: 0.5em;
+    li.text {
+        padding: 0.5em 1em;
     }
     a {
         color: $gray-100;
+    }
+    img.logo {
+        max-height: 5.5em;
+        padding-top: 1.5em;
+        padding-right: 1.5em;
+    }
+}
+
+.cta {
+    $size: 3em;
+    position: fixed;
+    right: 1em;
+    bottom: -10vh;
+    z-index: 1;
+    padding: 0;
+    transition: bottom 0.5s;
+    &.cta-in-view {
+        position: fixed;
+        right: 1em;
+        bottom: 1em;
+    }
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $size;
+        height: $size;
+        border-radius: $size/2;
+        text-align: center;
+        text-decoration: none; //transition: color 0.5s;
+        color: $primary;
+        background-color: $secondary;
+        box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.3);
+        transition: transform 0.5s, background-color 0.33s, color 0.5s, box-shadow 0.5s;
+        svg {
+            width: 1em;
+            height: 1em;
+            path {
+                fill: $primary;
+            }
+        }
+    }
+    &:hover {
+        a {
+            background-color: $primary; //darken($primary,20);
+            box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.5);
+            color: $secondary;
+            svg path {
+                fill: $secondary;
+            }
+        }
     }
 }
 
@@ -37,18 +90,18 @@ nav {
     > :last-child {
         padding-bottom: $height;
     }
-    > :nth-child(1n) {  
+    > :nth-child(1n) {
         background-color: $color1;
-    } 
+    }
     > :nth-child(2n) {
         position: relative;
         padding-top: $height;
-        padding-bottom: $height;  
+        padding-bottom: $height;
         overflow: hidden;
         color: $color1;
         background-color: $color2;
         @media (min-width: map-get($grid-breakpoints, sm)) {
-            padding-top: 0;   
+            padding-top: 0;
             padding-bottom: 0;
         }
         &:before {

@@ -12,9 +12,9 @@ const App = (props) => {
     <div>
       <Header language={props.language} changeLanguage={props.changeLanguage} />
       <Switch>
-        <Route exact path="/" render={(matchProps) => <PortfolioItems  {...matchProps} language={props.language} />} />
-        <Route path="/portfolio/:urlSlug" render={(matchProps) => <PortfolioItem {...matchProps} language={props.language} />} />
-        <Route path="*" render={(props) => { return <Redirect to="/" push /> }} />
+        <Route exact path="/webportfolio" render={(matchProps) => <PortfolioItems  {...matchProps} language={props.language} />} />
+        <Route path="/webportfolio/:urlSlug" render={(matchProps) => <PortfolioItem {...matchProps} language={props.language} />} />
+        <Route path="*" render={(props) => { return <Redirect to="/webportfolio" push /> }} />
       </Switch>
     </div>
   );

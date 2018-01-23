@@ -52,7 +52,7 @@ class PortfolioItems extends Component {
       let imageDesc = portfolioItem.thumbnailImage.value[0].description || '';
       let postDate = formatDate(portfolioItem.actualLaunchDate.value);
       let summary = portfolioItem.description;
-      let link = '/portfolio/' + portfolioItem.friendlyUrl.value;
+      let link = '/webportfolio/' + portfolioItem.friendlyUrl.value;
       let features = portfolioItem.features;
 
       result.push(

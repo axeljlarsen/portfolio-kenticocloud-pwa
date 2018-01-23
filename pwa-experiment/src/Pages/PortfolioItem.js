@@ -47,16 +47,18 @@ class PortfolioItem extends Component {
     };
 
     let title = portfolioItem.title.value;
-    let imageUrl = portfolioItem.largeImage.value[0].url;
-    let imageDesc = portfolioItem.largeImage.value[0].description;
-    let postDate = formatDate(portfolioItem.actualLaunchDate.value);
+    let imageUrl = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].url : '';
+    let imageDesc = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].description : '';
+    let postDate = formatDate(portfolioItem.actualLaunchDate.value.length);
     let bodyCopyElement = portfolioItem.description;
-    let clientInfo = portfolioItem.client[0];
+    let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
+    let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
     let subtitle = portfolioItem.subtitle.value;
     let lengthOfEngagement = portfolioItem.lengthOfEngagement.value;
     let technologies = portfolioItem.technologies;
     let deviceSectionCount = portfolioItem.deviceSections.length;
 
+    // Move the main call to action into view when the user scrolls.
     window.addEventListener('scroll', function () {
       var cta = document.querySelector('.cta');
       if (cta) {
@@ -68,6 +70,31 @@ class PortfolioItem extends Component {
         }
       }
     });
+
+    // Create a subtle floating effect based on mouse position.
+    // var lFollowX = 0,
+    //   lFollowY = 0,
+    //   x = 0,
+    //   y = 25,
+    //   friction = 1 / 30;
+    // function parallaxFloat() {
+    //   x += (lFollowX - x) * friction;
+    //   y += (lFollowY - y) * friction;
+    //   y = (y < 15) ? 15 : (y > 50) ? 50 : y;
+    //   var translate = 'translate(' + x + '%, ' + y + '%)';
+    //   var pFloat = document.querySelector('.parallax-floating');
+    //   if (pFloat) {
+    //     pFloat.style.transform = translate;
+    //   }
+    //   requestAnimationFrame(parallaxFloat);
+    // }
+    // window.addEventListener('mousemove', function (e) {
+    //   var lMouseX = Math.max(-100, Math.min(100, window.outerWidth / 2 - e.clientX));
+    //   var lMouseY = Math.max(-100, Math.min(100, window.outerHeight / 2 - e.clientY));
+    //   lFollowX = lMouseX / 5; // 100 : 12 = lMouxeX : lFollow
+    //   lFollowY = lMouseY / 5;
+    //   parallaxFloat();
+    // });
 
     return (
       <portfolioItem className="portfolioItem-detail portfolioItem-detail-related-box">
@@ -93,7 +120,7 @@ class PortfolioItem extends Component {
               <ul className="list-unstyled">
                 <li><strong>Launch Date:</strong> {postDate}</li>
                 <li><strong>Project Timeline:</strong> {lengthOfEngagement}</li>
-                <li><strong>Industry:</strong> industry placeholder</li>
+                <li><strong>Industry:</strong> {clientIndustry}</li>
               </ul>
               <h3 className="text-quaternary"><strong>Key Features</strong></h3>
               <table>
@@ -101,8 +128,8 @@ class PortfolioItem extends Component {
                   {
                     portfolioItem.features.map((feature, index) => {
                       if (feature) {
-                        let featureImageUrl = feature.icon.value[0].url;
-                        let featureImageDesc = feature.icon.value[0].description;
+                        let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
+                        let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
                         return (
                           <tr key={index}>
                             <td className="align-middle text-center">
@@ -127,8 +154,8 @@ class PortfolioItem extends Component {
                 {
                   portfolioItem.technologies.map((technology, index) => {
                     if (technology) {
-                      let technologyImageUrl = technology.colorIcon.value[0].url;
-                      let technologyImageDesc = technology.colorIcon.value[0].description;
+                      let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
+                      let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
                       return (
                         <div className="col-60 col-sm-40 col-lg-30 mb-2" key={index}>
                           <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
@@ -153,8 +180,8 @@ class PortfolioItem extends Component {
                 {
                   portfolioItem.testedPlatforms.map((technology, index) => {
                     if (technology) {
-                      let technologyImageUrl = technology.colorIcon.value[0].url;
-                      let technologyImageDesc = technology.colorIcon.value[0].description;
+                      let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
+                      let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
                       return (
                         <div className="col-60 col-sm-40 col-lg-30 mb-2" key={index}>
                           <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />

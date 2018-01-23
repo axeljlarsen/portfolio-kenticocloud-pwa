@@ -103,13 +103,12 @@
 }
 
 .portfolioItem-tile {
+    display: inline-block;
     margin-bottom: 2em;
     overflow: hidden;
     background: $white;
     border-radius: 0.5em;
-    box-shadow: .5em .75em 0.75em rgba(0, 0, 0, 0.1); // @extend .col-xs-12;
-    // @extend .col-sm-6;
-    // @extend .col-xl-3;
+    box-shadow: .5em .75em 0.75em rgba(0, 0, 0, 0.1); 
     >a {
         display: inline-block;
         overflow: hidden;

@@ -41,11 +41,11 @@ class PortfolioItems extends Component {
     let counter = 0;
 
     let portfolioItems = this.state.portfolioItems.reduce((result, portfolioItem, index) => {
-      if (index % 3 === 0) {
-        result.push(
-          <div className="clear" key={counter++}></div>
-        );
-      }
+      // if (index % 3 === 0) {
+      //   result.push(
+      //     <div className="clear" key={counter++}></div>
+      //   );
+      // }
 
       let title = portfolioItem.title.value;
       let imageUrl = portfolioItem.thumbnailImage.value[0].url || '';
@@ -78,8 +78,8 @@ class PortfolioItems extends Component {
     }, []);
 
     return (
-      <div className="container">
-        <div className="row bg-cube pt-5 pb-5">
+      <div className="container-fluid">
+        <div className="row masonry bg-cube pt-5 pb-5">
           {portfolioItems}
         </div>
       </div>

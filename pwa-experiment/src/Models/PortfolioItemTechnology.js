@@ -7,6 +7,9 @@ export class PortfolioItemTechnology extends ContentItem {
         super({
             propertyResolver: ((fieldName) => {
 
+                if (fieldName === 'color_with_drop_shadow_icon') {
+                    return 'colorWithDropShadowIcon';
+                }
                 if (fieldName === 'color_icon') {
                     return 'colorIcon';
                 }

@@ -1,8 +1,11 @@
 @import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import 'src/Styles/_Mixins.scss';
 @import 'src/Styles/Components/_Portfolio.scss';
+html {
+    font-size: 1em;
+}
 body {
-    margin: 0;
+    margin: 0; 
     padding: 0;
     background: $gray-100;
 }
@@ -83,6 +86,30 @@ nav {
     }
 }
 
+.masonry {
+    display: block;
+    @media (min-width: map-get($grid-breakpoints, sm)) {
+        column-count: 2;
+        column-gap: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+
+        > * { 
+            max-width: none;
+            padding: 0;
+        }
+    }
+    @media (min-width: map-get($grid-breakpoints, md)) {
+        column-count: 2;
+    }
+    @media (min-width: map-get($grid-breakpoints, lg)) {
+        column-count: 3;
+    }
+    @media (min-width: map-get($grid-breakpoints, xl)) {
+        column-count: 4;
+    }
+}
+
 @mixin bg-alt-diagonal ($pos, $height, $color1, $color2) {
     > :first-child {
         padding-top: $height;
@@ -97,7 +124,6 @@ nav {
         position: relative;
         padding-top: $height;
         padding-bottom: $height;
-        overflow: hidden;
         color: $color1;
         background-color: $color2;
         @media (min-width: map-get($grid-breakpoints, sm)) {

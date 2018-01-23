@@ -4,7 +4,7 @@ import Link from '../Components/LowerCaseUrlLink';
 
 const Header = () => {
   return (
-    <header className="noRowMargin container">
+    <header className="noRowMargin container-fluid">
       <div className="row">
         <nav className="col-120">
           <ul className="list-unstyled">

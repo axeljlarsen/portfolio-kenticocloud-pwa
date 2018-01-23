@@ -73,7 +73,7 @@ class PortfolioItem extends Component {
       <portfolioItem className="portfolioItem-detail portfolioItem-detail-related-box">
 
         <div className="cta text">
-          <Link to={`/webportfolio`}>
+          <Link to={`/webportfolio/`}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.4 22.3"><title>icon-left-arrow</title><path d="M18.87,28.68a.74.74,0,0,1-.45.15.59.59,0,0,1-.4-.15L7.47,18.08a.51.51,0,0,1-.1-.7.47.47,0,0,1,.1-.1L18,6.68a.5.5,0,0,1,.4-.15.74.74,0,0,1,.45.15l.35.4a.53.53,0,0,1,.15.4.74.74,0,0,1-.15.45l-8.95,8.9h18.8a.6.6,0,0,1,.6.6h0v.5a.6.6,0,0,1-.6.6H10.27l9,8.9a.72.72,0,0,1,.15.45.54.54,0,0,1-.15.4Z" transform="translate(-7.27 -6.53)" /></svg>
           </Link>
         </div >

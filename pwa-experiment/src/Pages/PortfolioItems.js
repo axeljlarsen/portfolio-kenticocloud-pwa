@@ -50,10 +50,9 @@ class PortfolioItems extends Component {
       let title = portfolioItem.title.value;
       let imageUrl = portfolioItem.thumbnailImage.value[0].url || '';
       let imageDesc = portfolioItem.thumbnailImage.value[0].description || '';
-      let postDate = formatDate(portfolioItem.launchDate.value);
+      let postDate = formatDate(portfolioItem.actualLaunchDate.value);
       let summary = portfolioItem.description;
-      let link = '/portfolioItems/' + portfolioItem.friendlyURL.value;
-
+      let link = '/portfolio/' + portfolioItem.friendlyUrl.value;
       let features = portfolioItem.features;
 
       result.push(

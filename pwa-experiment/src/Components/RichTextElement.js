@@ -12,8 +12,10 @@ function handleClick(element, history, match, e) {
 
     if (link) {
       const path = resolveContentLink(link);
+      //const language = getLanguageCode(match).toLowerCase();;
 
       if (path) {
+        //history.push(`/${language}${path}`);
         history.push(`/${path}`);
       }
     }
@@ -22,7 +24,7 @@ function handleClick(element, history, match, e) {
 
 const RichTextElement = (props) => {
   return (
-    <div className={props.className} dangerouslySetInnerHTML={{ __html: props.element.getHtml() }} onClick={(e) => handleClick(props.element, props.history, props.match, e)} />
+    <div className={props.className} dangerouslySetInnerHTML={{ __html: props.element.value }} onClick={(e) => handleClick(props.element, props.history, props.match, e)} />
   );
 };
 

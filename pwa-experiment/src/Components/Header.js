@@ -1,10 +1,19 @@
 import React from 'react';
-import { Link, IndexLink } from 'react-router'
 import logo from '../Images/logo-skyline.png';
+import Link from '../Components/LowerCaseUrlLink';
 
 const Header = () => {
   return (
-    <header className="noRowMargin row">
+    <header className="noRowMargin container">
+      <div className="row">
+        <nav className="col-120">
+          <ul className="list-unstyled">
+            <li>
+              <Link to={`/portfolio`}>Portfolio</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
   );
 }

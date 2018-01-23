@@ -4,13 +4,10 @@ import LinkButton from '../Components/LinkButton';
 import RichTextElement from '../Components/RichTextElement';
 import SkylineClientCard from '../Components/SkylineClientCard';
 import dateFormat from 'dateformat';
-import sampleMonitorImage from '../Images/wmmb-eatwisconsincheese-imac.png';
-import samplePhoneImage from '../Images/wmmb-eatwisconsincheese-galaxys8.png';
-import sampleTabletImage from '../Images/wmmb-eatwisconsincheese-ipad.png';
 
 let getState = (props) => {
   return {
-    portfolioItem: PortfolioItemStore.getItem(props.params.urlSlug)
+    portfolioItem: PortfolioItemStore.getItem(props.match.params.urlSlug)
   };
 };
 
@@ -25,7 +22,7 @@ class PortfolioItem extends Component {
 
   componentDidMount() {
     PortfolioItemStore.addChangeListener(this.onChange);
-    PortfolioItemStore.provideItem(this.props.params.urlSlug);
+    PortfolioItemStore.provideItem(this.props.match.params.urlSlug);
   }
 
   componentWillUnmount() {
@@ -52,7 +49,7 @@ class PortfolioItem extends Component {
     let title = portfolioItem.title.value;
     let imageUrl = portfolioItem.largeImage.value[0].url;
     let imageDesc = portfolioItem.largeImage.value[0].description;
-    let postDate = formatDate(portfolioItem.launchDate.value);
+    let postDate = formatDate(portfolioItem.actualLaunchDate.value);
     let bodyCopyElement = portfolioItem.description;
     let clientInfo = portfolioItem.client[0];
     let subtitle = portfolioItem.subtitle.value;
@@ -85,18 +82,20 @@ class PortfolioItem extends Component {
                 <tbody>
                   {
                     portfolioItem.features.map((feature, index) => {
-                      let featureImageUrl = feature.icon.value[0].url;
-                      let featureImageDesc = feature.icon.value[0].description;
-                      return (
-                        <tr key={index}>
-                          <td className="align-middle text-center">
-                            <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
-                          </td>
-                          <td>
-                            <span>{feature.caption.value}</span>
-                          </td>
-                        </tr>
-                      )
+                      if (feature) {
+                        let featureImageUrl = feature.icon.value[0].url;
+                        let featureImageDesc = feature.icon.value[0].description;
+                        return (
+                          <tr key={index}>
+                            <td className="align-middle text-center">
+                              <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
+                            </td>
+                            <td>
+                              <span>{feature.caption.value}</span>
+                            </td>
+                          </tr>
+                        )
+                      }
                     })
                   }
                 </tbody>
@@ -109,20 +108,22 @@ class PortfolioItem extends Component {
               <div className="row">
                 {
                   portfolioItem.technologies.map((technology, index) => {
-                    let technologyImageUrl = technology.colorIcon.value[0].url;
-                    let technologyImageDesc = technology.colorIcon.value[0].description;
-                    return (
-                      <div className="col-60 col-sm-40 col-lg-30 mb-2" key={index}>
-                        <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                        {
-                          technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
-                            return (
-                              <span key={technicalSkill.codename}>{technicalSkill.name}</span>
-                            )
-                          })
-                        }
-                      </div>
-                    )
+                    if (technology) {
+                      let technologyImageUrl = technology.colorIcon.value[0].url;
+                      let technologyImageDesc = technology.colorIcon.value[0].description;
+                      return (
+                        <div className="col-60 col-sm-40 col-lg-30 mb-2" key={index}>
+                          <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
+                          {
+                            technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
+                              return (
+                                <span key={technicalSkill.codename}>{technicalSkill.name}</span>
+                              )
+                            })
+                          }
+                        </div>
+                      )
+                    }
                   })
                 }
               </div>
@@ -133,20 +134,22 @@ class PortfolioItem extends Component {
               <div className="row text-gray">
                 {
                   portfolioItem.testedPlatforms.map((technology, index) => {
-                    let technologyImageUrl = technology.colorIcon.value[0].url;
-                    let technologyImageDesc = technology.colorIcon.value[0].description;
-                    return (
-                      <div className="col-60 col-sm-40 col-lg-30 mb-2" key={index}>
-                        <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                        {
-                          technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
-                            return (
-                              <span key={technicalSkill.codename}>{technicalSkill.name}</span>
-                            )
-                          })
-                        }
-                      </div>
-                    )
+                    if (technology) {
+                      let technologyImageUrl = technology.colorIcon.value[0].url;
+                      let technologyImageDesc = technology.colorIcon.value[0].description;
+                      return (
+                        <div className="col-60 col-sm-40 col-lg-30 mb-2" key={index}>
+                          <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
+                          {
+                            technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
+                              return (
+                                <span key={technicalSkill.codename}>{technicalSkill.name}</span>
+                              )
+                            })
+                          }
+                        </div>
+                      )
+                    }
                   })
                 }
               </div>
@@ -156,19 +159,21 @@ class PortfolioItem extends Component {
           <div className="row bg-alt-diagonal-white-primary portfolioItem-device-sections">
             {
               portfolioItem.deviceSections.map((section, index) => {
-                return (
-                  <div className="col-120" key={index}>
-                    <div className="row align-items-center align-self-center">
-                      {
-                        section.columns.map((column, index) => {
-                          return (
-                            <RichTextElement className={column.classList.value} element={column.content} key={column.system.codename} />
-                          )
-                        })
-                      }
+                if (section) {
+                  return (
+                    <div className="col-120" key={index}>
+                      <div className="row align-items-center align-self-center">
+                        {
+                          section.columns.map((column, index) => {
+                            return (
+                              <RichTextElement className={column.classList.value} element={column.content} key={column.system.codename} />
+                            )
+                          })
+                        }
+                      </div>
                     </div>
-                  </div>
-                )
+                  )
+                }
               })
             }
           </div>

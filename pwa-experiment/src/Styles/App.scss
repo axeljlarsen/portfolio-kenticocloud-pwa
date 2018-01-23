@@ -15,6 +15,21 @@ img {
     box-sizing: border-box; 
 }
 
+nav {
+    background: $gray-1000;
+    ul {
+        margin: auto;
+    }
+    li {
+        display: inline-block;
+        margin-right: 1em;
+        padding: 0.5em;
+    }
+    a {
+        color: $gray-100;
+    }
+}
+
 @mixin bg-alt-diagonal ($pos, $height, $color1, $color2) {
     > :first-child {
         padding-top: $height;

@@ -2,7 +2,6 @@ import { ContentItem } from 'kentico-cloud-delivery-typescript-sdk';
 import { resolveContentLink } from '../Utilities/ContentLinks';
 
 export class PortfolioItem extends ContentItem {
-
     constructor() {
         super({
             propertyResolver: ((fieldName) => {
@@ -24,7 +23,7 @@ export class PortfolioItem extends ContentItem {
                 }
 
                 if (fieldName === 'actual_launch_date') {
-                    return 'launchDate';
+                    return 'actualLaunchDate';
                 }
 
                 if (fieldName === 'description') {
@@ -64,7 +63,7 @@ export class PortfolioItem extends ContentItem {
                 }
 
                 if (fieldName === 'friendly_url') {
-                    return 'friendlyURL';
+                    return 'friendlyUrl';
                 }
 
                 if (fieldName === 'device_sections') {
@@ -75,5 +74,4 @@ export class PortfolioItem extends ContentItem {
             linkResolver: (link) => resolveContentLink(link)
         })
     }
-
 }

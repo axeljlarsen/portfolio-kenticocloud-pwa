@@ -124,6 +124,7 @@ nav {
         position: relative;
         padding-top: $height;
         padding-bottom: $height;
+        overflow: hidden;
         color: $color1;
         background-color: $color2;
         @media (min-width: map-get($grid-breakpoints, sm)) {

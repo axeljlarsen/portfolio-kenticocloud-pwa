@@ -71,28 +71,29 @@ class PortfolioItem extends Component {
       }
     });
 
-    // Create a subtle floating effect based on mouse position.
-    // var lFollowX = 0,
-    //   lFollowY = 0,
-    //   x = 0,
-    //   y = 25,
-    //   friction = 1 / 30;
-    // function parallaxFloat() {
-    //   x += (lFollowX - x) * friction;
-    //   y += (lFollowY - y) * friction;
-    //   y = (y < 15) ? 15 : (y > 50) ? 50 : y;
-    //   var translate = 'translate(' + x + '%, ' + y + '%)';
-    //   var pFloat = document.querySelector('.parallax-floating');
-    //   if (pFloat) {
-    //     pFloat.style.transform = translate;
-    //   }
-    //   requestAnimationFrame(parallaxFloat);
-    // }
+    //Create a subtle floating effect based on mouse position.
+    var lFollowX = 0,
+      lFollowY = 0,
+      x = 0,
+      y = 0,
+      friction = 1 / 30,
+      midX = window.outerWidth / 2,
+      midY = window.outerHeight / 2;
+    function parallaxFloat() {
+      x += (lFollowX - x) * friction;
+      y += (lFollowY - y) * friction;
+      var translate = 'translate(' + x + '%, ' + y + '%)';
+      var pFloat = document.querySelector('.parallax-floating');
+      if (pFloat) {
+        pFloat.style.transform = translate;
+      }
+      requestAnimationFrame(parallaxFloat);
+    }
     // window.addEventListener('mousemove', function (e) {
-    //   var lMouseX = Math.max(-100, Math.min(100, window.outerWidth / 2 - e.clientX));
-    //   var lMouseY = Math.max(-100, Math.min(100, window.outerHeight / 2 - e.clientY));
-    //   lFollowX = lMouseX / 5; // 100 : 12 = lMouxeX : lFollow
-    //   lFollowY = lMouseY / 5;
+    //   var xDir = e.clientX > midX ? -1 : 1;
+    //   var yDir = e.clientY > midY ? -1 : 1;
+    //    lFollowX = xDir * 50 * (e.clientX / window.outerWidth);
+    //    lFollowY = yDir * 50 * (e.clientY / window.outerHeight);
     //   parallaxFloat();
     // });
 

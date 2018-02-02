@@ -50,7 +50,7 @@ class PortfolioItem extends Component {
     let imageUrl = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].url : '';
     let imageDesc = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].description : '';
     let postDate = formatDate(portfolioItem.actualLaunchDate.value.length);
-    let bodyCopyElement = portfolioItem.description;
+    let description = portfolioItem.description;
     let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
     let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
     let subtitle = portfolioItem.subtitle.value;
@@ -115,7 +115,7 @@ class PortfolioItem extends Component {
             <div className="col-120 offset-sm-10 col-sm-70 pt-5 pb-5">
               <h1>{title}</h1>
               <h2>{subtitle}</h2>
-              <RichTextElement className="portfolioItem-detail-content" element={bodyCopyElement} />
+              <RichTextElement className="portfolioItem-detail-content" element={description} />
             </div>
             <div className="col-120 col-sm-40 pt-5 pb-5 bg-cube portfolioItem-detail-features">
               <ul className="list-unstyled">

@@ -1,0 +1,160 @@
+@import 'src/Styles/SkylinePortfolio/Variables';
+.portfolioItem-detail {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    h3 {
+        font-size: 1.6em;
+    }
+    .icon {
+        max-height: 1.5em;
+        padding-right: 0.5em;
+    }
+    .portfolioItem-detail-image {
+        position: relative;
+        min-height: 20vh;
+        overflow: hidden;
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+            min-height: 0;
+        }
+        img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            max-width: none;
+            height: 100%;
+            transform: translate(-50%, -50%);
+            transform-origin: center;
+            transition: top 1s, left 1s, transform 1s;
+            @media (min-width: map-get($grid-breakpoints, sm)) {
+                position: relative;
+                max-width: 100%;
+                height: auto;
+                transform: translateX(-50%);
+            }
+        }
+    } // .portfolioItem-detail-image:hover img {
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%) scale(1.25);
+    //     @media (min-width: map-get($grid-breakpoints, sm)) {
+    //         transform: translateX(-50%) scale(1.25);
+    //     }
+    // }
+    .portfolioItem-detail-content {
+        color: $gray-1000;
+    }
+    .portfolioItem-detail-features {
+        font-weight: $font-weight-light;
+        table {
+            tbody {
+                tr {
+                    td {
+                        padding: 0.5em 0;
+                    }
+                }
+            }
+        }
+    }
+    .portfolioItem-device-sections {
+        img {
+            max-height: 250px;
+            max-height: 25vh;
+            @media (min-width: map-get($grid-breakpoints, sm)) {
+                max-height: none;
+            } // @media (min-width: map-get($grid-breakpoints, sm)) {
+            //     max-height: 300px;
+            //     max-height: 30vh;
+            // }
+            // @media (min-width: map-get($grid-breakpoints, md)) {
+            //     max-height: 350px;
+            //     max-height: 35vh;
+            // }
+        }
+        > :nth-child(1n)>.row {
+            text-align: center;
+        }
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+            > :nth-child(1n)>.row {
+                text-align: left;
+            }
+            > :nth-child(2n)>.row {
+                text-align: center;
+                >.order-sm-1 {
+                    transform: translateY(50%);
+                }
+                >.order-sm-2 {
+                    transform: translateY(25%);
+                }
+                >.order-sm-3 {
+                    transform: translateY(-50%);
+                }
+            }
+            > :nth-child(3n)>.row {
+                text-align: right;
+            }
+        }
+    }
+}
+
+.portfolioItem-tile {
+    display: inline-block;
+    margin-bottom: 2em;
+    overflow: hidden;
+    background: $white;
+    border-radius: 0.5em;
+    box-shadow: .5em .75em 0.75em rgba(0, 0, 0, 0.1);
+    >a {
+        display: inline-block;
+        overflow: hidden;        
+        /* 
+        * The fix described by 'Comment IMG_0001' 
+        * presents an issue regarding the border-radius of this
+        * element's parent. Set translateZ(0) for the transform property
+        * in order to fix it.
+        */
+        transform: translateZ(0);
+
+        &:hover {
+            img.portfolioItem-tile-image {
+                transform-origin: center;
+                transform: scale(1.25);
+            }
+        }
+        img.portfolioItem-tile-image {
+            transition: transform 1s;
+            /*
+            * Comment IMG_0001
+            * The following properties are all needed to resolve
+            * a bizarre issue when img element's are scaled via
+            * the css property transform. Without all of these 
+            * properties, img elements within a masonry style layout
+            * will vanish. This also fixes a blur effect that occurs
+            * to img elements that finish scaling up.
+            */
+            -webkit-backface-visibility: hidden;
+            -ms-transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+    }
+    .portfolioItem-tile-date {
+        display: inline-block;
+        padding: 0.25em .75em;
+        margin-top: 1em;
+        margin-left: 1em;
+        text-transform: uppercase;
+        color: $white;
+        background: $secondary;
+        border-radius: 5.5em;
+    }
+    .portfolioItem-tile-content {
+        padding: 1em;
+        > :first-child {
+            margin-top: auto;
+        }
+    }
+}

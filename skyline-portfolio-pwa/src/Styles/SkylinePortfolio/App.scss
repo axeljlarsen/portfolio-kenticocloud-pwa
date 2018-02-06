@@ -63,8 +63,8 @@ nav {
         bottom: 1em;
     }
     a {
-        display: flex;
-        align-items: center;
+        display: flex; 
+        align-items: center;  
         justify-content: center;
         width: $size;
         height: $size;
@@ -79,7 +79,7 @@ nav {
             width: 1em;
             height: 1em;
             path {
-                fill: $primary;
+                fill: $primary; 
             }
         }
     }
@@ -169,7 +169,7 @@ nav {
 .bg-lightgray {
     background-color: $gray-100;
     color: $gray-1000;
-}
+} 
 
 .bg-darkgray {
     background-color: $gray-1000;

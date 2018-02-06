@@ -109,7 +109,7 @@
     box-shadow: .5em .75em 0.75em rgba(0, 0, 0, 0.1);
     >a {
         display: inline-block;
-        overflow: hidden;        
+        overflow: hidden;
         /* 
         * The fix described by 'Comment IMG_0001' 
         * presents an issue regarding the border-radius of this
@@ -117,13 +117,6 @@
         * in order to fix it.
         */
         transform: translateZ(0);
-
-        &:hover {
-            img.portfolioItem-tile-image {
-                transform-origin: center;
-                transform: scale(1.25);
-            }
-        }
         img.portfolioItem-tile-image {
             transition: transform 1s;
             /*
@@ -141,6 +134,7 @@
             transform: translateZ(0);
         }
     }
+    
     .portfolioItem-tile-date {
         display: inline-block;
         padding: 0.25em .75em;
@@ -157,4 +151,23 @@
             margin-top: auto;
         }
     }
+    .portfolioItem-tile-features {
+        //margin: 1em -1em auto;
+        text-align: center;
+        p {
+            padding: 0.5em;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin: auto;
+            img {
+                margin-right: 0.5em;
+            }
+        }
+    }
+}
+.portfolioItem-tile > a {
+    cursor: pointer;
+}
+.portfolioItem-tile > a:hover img.portfolioItem-tile-image {
+    transform-origin: center;
+    transform: scale(1.25);
 }

@@ -42,14 +42,15 @@ class PortfolioItem extends Component {
       );
     }
 
-    let formatDate = (value) => {
-      return dateFormat(value, "mmmm yyyy");
+    let formatDate = (value, format) => {
+      if (!format) format = 'mmmm yyyy';
+      return dateFormat(value, 'mmmm yyyy');
     };
 
     let title = portfolioItem.title.value;
     let imageUrl = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].url : '';
     let imageDesc = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].description : '';
-    let postDate = formatDate(portfolioItem.actualLaunchDate.value.length);
+    let postDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
     let description = portfolioItem.description;
     let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
     let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
@@ -119,7 +120,7 @@ class PortfolioItem extends Component {
             </div>
             <div className="col-120 col-sm-40 pt-5 pb-5 bg-cube portfolioItem-detail-features">
               <ul className="list-unstyled">
-                <li><strong>Launch Date:</strong> {postDate}</li>
+                <li><strong>Launched:</strong> {postDate}</li>
                 <li><strong>Project Timeline:</strong> {lengthOfEngagement}</li>
                 <li><strong>Industry:</strong> {clientIndustry}</li>
               </ul>

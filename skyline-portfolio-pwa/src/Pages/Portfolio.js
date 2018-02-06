@@ -39,8 +39,9 @@ class Portfolio extends Component {
   }
 
   render() {
-    let formatDate = (value) => {
-      return dateFormat(value, 'mmmm d');
+    let formatDate = (value, format) => {
+      if (!format) format = 'mmmm d';
+      return dateFormat(value, format);
     };
 
     let counter = 0;
@@ -52,20 +53,14 @@ class Portfolio extends Component {
       //   );
       // }
 
-      // let title = portfolioItem.title.value;
-      // let imageUrl = portfolioItem.thumbnailImage.value[0].url || '';
-      // let imageDesc = portfolioItem.thumbnailImage.value[0].description || '';
-      // let postDate = formatDate(portfolioItem.actualLaunchDate.value);
-      // let description = portfolioItem.description;
-      // let features = portfolioItem.features;
       let link = '/webportfolio/' + portfolioItem.friendlyUrl.value;
 
       let title = portfolioItem.title.value;
       let imageUrl = (portfolioItem.thumbnailImage.value.length) ? portfolioItem.thumbnailImage.value[0].url : '';
       let imageDesc = (portfolioItem.thumbnailImage.value.length) ? portfolioItem.thumbnailImage.value[0].description : '';
-      let postDate = formatDate(portfolioItem.actualLaunchDate.value.length);
+      let postDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
       let description = {
-        value: shorten(portfolioItem.description.value.replace(/(<([^>]+)>)/ig,''),97).concat('...')
+        value: shorten(portfolioItem.description.value.replace(/(<([^>]+)>)/ig, ''), 97).concat('...')
       };
       let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
       let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
@@ -79,36 +74,33 @@ class Portfolio extends Component {
             <Link to={link}>
               <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
             </Link>
-            <div className="portfolioItem-tile-date d-none">
+            <div className="portfolioItem-tile-date">
               {postDate}
             </div>
             <div className="portfolioItem-tile-content">
               <h2 className="h4">
                 <Link to={link}>{title}</Link>
-              </h2>            
-              <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '') } element={description} />
-              <table>
-                <tbody>
-                  {
-                    portfolioItem.features.map((feature, index) => {
-                      if (feature) {
-                        let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
-                        let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
-                        return (
-                          <tr key={index}>
-                            <td className="align-middle text-center">
-                              <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
-                            </td>
-                            <td>
-                              <span>{feature.caption.value}</span>
-                            </td>
-                          </tr>
-                        )
-                      }
-                    })
+              </h2>
+              <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
+
+            </div>
+            <div className="portfolioItem-tile-features">
+              {
+                portfolioItem.features.map((feature, index) => {
+                  if (feature) {
+                    let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
+                    let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
+                    return (
+                      <p key={index}>
+                        <span className="align-middle text-center">
+                          <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
+                          <span>{feature.caption.value}</span>
+                        </span>
+                      </p>
+                    )
                   }
-                </tbody>
-              </table>
+                })
+              }
             </div>
           </div>
         </div>

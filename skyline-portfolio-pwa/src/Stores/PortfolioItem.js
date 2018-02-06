@@ -14,10 +14,21 @@ let notifyChange = () => {
     });
 }
 
-let fetchItems = () => {
+let fetchItems = () => {    
+    var urlParams = new URLSearchParams(window.location.search);
+    var privateItems = urlParams.get('private_items') == 1 || urlParams.get('private_items') == ''; 
+
     var query = Client.items()
         .type(systemType)
         .depthParameter(depth);
+
+    if (privateItems) {
+        //if private items should show then show everything   
+    }
+    else {
+        //else if only public items should show then filter on public_item element
+        query.containsFilter('elements.public_item', ['true']); // public items
+    }
 
     query.get()
         .subscribe(response => {

@@ -6,6 +6,10 @@ export class PortfolioItem extends ContentItem {
         super({
             propertyResolver: ((fieldName) => {
 
+                if (fieldName === 'public_item') {
+                    return 'publicItem';
+                }
+                
                 if (fieldName === 'client') {
                     return 'client';
                 }

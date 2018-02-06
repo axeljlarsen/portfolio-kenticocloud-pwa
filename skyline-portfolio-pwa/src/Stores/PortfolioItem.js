@@ -14,9 +14,9 @@ let notifyChange = () => {
     });
 }
 
-let fetchItems = () => {    
+let fetchItems = (privateItems) => {    
     var urlParams = new URLSearchParams(window.location.search);
-    var privateItems = urlParams.get('private_items') == 1 || urlParams.get('private_items') == ''; 
+    if (!privateItems) privateItems = urlParams.get('private_items') == 1 || urlParams.get('private_items') == ''; 
 
     var query = Client.items()
         .type(systemType)
@@ -76,7 +76,7 @@ class PortfolioItemStore {
     // Actions
 
     provideItem(urlSlug) {
-        fetchItems();
+        fetchItems(true);
     }
 
     provideItems(count) {

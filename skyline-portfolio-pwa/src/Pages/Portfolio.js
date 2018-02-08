@@ -70,11 +70,11 @@ class Portfolio extends Component {
 
       result.push(
         <div className="col col-sm-60 col-md-40 mb-4" key={counter++}>
-        <div className="card h-100">
+        <div className="card card-portfolio-item h-100">
           <Link to={link}>
             <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
           </Link>
-          <div className="card-body portfolioItem-tile">
+          <div className="card-body">
             <span className="badge badge-secondary p-1 mb-2">{postDate}</span>
             <h2 className="h4">
               <Link to={link}>{title}</Link>

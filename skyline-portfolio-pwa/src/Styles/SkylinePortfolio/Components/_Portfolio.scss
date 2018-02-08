@@ -100,8 +100,8 @@
     }
 }
 
-.portfolioItem-tile {
-    >a {
+.card-portfolio-item {
+    > a {
         display: inline-block;
         overflow: hidden;
         /* 
@@ -126,6 +126,11 @@
             -ms-transform: translateZ(0);
             -webkit-transform: translateZ(0);
             transform: translateZ(0);
+
+            &:hover {
+                transform-origin: center;
+                transform: scale(1.25);
+            }
         }
     }
     

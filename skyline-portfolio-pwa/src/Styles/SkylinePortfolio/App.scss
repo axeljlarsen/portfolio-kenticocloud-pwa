@@ -4,6 +4,10 @@
 @import 'src/Styles/_Bootstrap-4.0.0/scss/variables';
 @import 'src/Styles/_Bootstrap-4.0.0/scss/bootstrap';
 @import 'src/Styles/SkylinePortfolio/Components/Portfolio';
+* {
+    box-sizing: border-box;
+}
+
 html {
     font-size: 1em;
 }
@@ -15,11 +19,22 @@ body {
 }
 
 img {
-    max-width: 100%; 
+    max-width: 100%;
 }
- 
-* {
-    box-sizing: border-box;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    a,
+    a:hover,
+    a:focus,
+    a:active,
+    a:link {
+        text-decoration: none;
+    }
 }
 
 nav {
@@ -63,8 +78,8 @@ nav {
         bottom: 1em;
     }
     a {
-        display: flex; 
-        align-items: center;  
+        display: flex;
+        align-items: center;
         justify-content: center;
         width: $size;
         height: $size;
@@ -79,7 +94,7 @@ nav {
             width: 1em;
             height: 1em;
             path {
-                fill: $primary; 
+                fill: $primary;
             }
         }
     }
@@ -101,7 +116,7 @@ nav {
         column-count: 2;
         column-gap: 2em;
         padding-left: 2em;
-        padding-right: 2em; 
+        padding-right: 2em;
         >* {
             max-width: none;
             padding: 0;
@@ -169,7 +184,7 @@ nav {
 .bg-lightgray {
     background-color: $gray-100;
     color: $gray-1000;
-} 
+}
 
 .bg-darkgray {
     background-color: $gray-1000;

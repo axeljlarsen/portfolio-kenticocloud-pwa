@@ -1,4 +1,4 @@
-import { CloudError } from 'kentico-cloud-delivery-typescript-sdk';
+import { CloudError, SortOrder } from 'kentico-cloud-delivery-typescript-sdk';
 import Client from "../Client.js";
 import localforage from "localforage";
 import { PortfolioItem } from "../Models/PortfolioItem";
@@ -20,13 +20,16 @@ let fetchItems = (privateItems) => {
 
     var query = Client.items()
         .type(systemType)
+        .orderParameter('elements.actual_launch_date',SortOrder.desc)
         .depthParameter(depth);
 
     if (privateItems) {
-        //if private items should show then show everything   
+        //if private items should show then show everything i.e. don't apply a filter
     }
     else {
-        //else if only public items should show then filter on public_item element
+        // else if only public items should show then filter on public_item element.
+        // We wrap the 'true' value in an array since public_item is a checkbox control
+        // and potentially contains multiple values.
         query.containsFilter('elements.public_item', ['true']); // public items
     }
 

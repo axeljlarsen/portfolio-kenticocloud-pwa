@@ -101,12 +101,6 @@
 }
 
 .portfolioItem-tile {
-    display: inline-block;
-    margin-bottom: 2em;
-    overflow: hidden;
-    background: $white;
-    border-radius: 0.5em;
-    box-shadow: .5em .75em 0.75em rgba(0, 0, 0, 0.1);
     >a {
         display: inline-block;
         overflow: hidden;
@@ -137,37 +131,9 @@
     
     .portfolioItem-tile-date {
         display: inline-block;
-        padding: 0.25em .75em;
-        margin-top: 1em;
-        margin-left: 1em;
         text-transform: uppercase;
         color: $white;
         background: $secondary;
         border-radius: 5.5em;
     }
-    .portfolioItem-tile-content {
-        padding: 1em;
-        > :first-child {
-            margin-top: auto;
-        }
-    }
-    .portfolioItem-tile-features {
-        //margin: 1em -1em auto;
-        text-align: center;
-        p {
-            padding: 0.5em;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            margin: auto;
-            img {
-                margin-right: 0.5em;
-            }
-        }
-    }
-}
-.portfolioItem-tile > a {
-    cursor: pointer;
-}
-.portfolioItem-tile > a:hover img.portfolioItem-tile-image {
-    transform-origin: center;
-    transform: scale(1.25);
 }

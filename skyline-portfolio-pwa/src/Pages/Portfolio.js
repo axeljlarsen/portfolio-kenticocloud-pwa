@@ -49,7 +49,7 @@ class Portfolio extends Component {
     let portfolioItems = this.state.portfolioItems.reduce((result, portfolioItem, index) => {
       // if (index % 3 === 0) {
       //   result.push(
-      //     <div className="clear" key={counter++}></div>
+      //     <div className="w-100" key={counter++}></div>
       //   );
       // }
 
@@ -69,40 +69,36 @@ class Portfolio extends Component {
       let technologies = portfolioItem.technologies;
 
       result.push(
-        <div className="col-120 col-sm-60 col-md-40 col-lg-30" key={counter++}>
-          <div className="portfolioItem-tile">
-            <Link to={link}>
-              <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
-            </Link>
-            <div className="portfolioItem-tile-date">
-              {postDate}
-            </div>
-            <div className="portfolioItem-tile-content">
-              <h2 className="h4">
-                <Link to={link}>{title}</Link>
-              </h2>
-              <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
+        <div className="col col-sm-60 col-md-40 mb-4" key={counter++}>
+        <div className="card h-100">
+          <Link to={link}>
+            <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
+          </Link>
+          <div className="card-body portfolioItem-tile">
+            <span className="badge badge-secondary p-1 mb-2">{postDate}</span>
+            <h2 className="h4">
+              <Link to={link}>{title}</Link>
+            </h2>
+            <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
 
-            </div>
-            <div className="portfolioItem-tile-features">
-              {
-                portfolioItem.features.map((feature, index) => {
-                  if (feature) {
-                    let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
-                    let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
-                    return (
-                      <p key={index}>
-                        <span className="align-middle text-center">
-                          <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
-                          <span>{feature.caption.value}</span>
-                        </span>
-                      </p>
-                    )
-                  }
-                })
-              }
-            </div>
           </div>
+          <div className="card-footer portfolioItem-tile-features">
+            {
+              portfolioItem.features.map((feature, index) => {
+                if (feature) {
+                  let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
+                  let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
+                  return (
+                    <div className={"align-middle text-center " + ((portfolioItem.features.length>1) ? "mb-2" : "")} key={index}>
+                      <img alt={featureImageDesc} className="img-responsive icon mr-2" src={featureImageUrl} title={featureImageDesc} />
+                      <span>{feature.caption.value}</span>
+                    </div>
+                  )
+                }
+              })
+            }
+          </div>
+        </div>
         </div>
       );
 
@@ -111,9 +107,9 @@ class Portfolio extends Component {
 
     return (
       <div className="container-fluid">
-        <div className="row masonry bg-cube pt-5 pb-5">
-          {portfolioItems}
-        </div>
+        <div className="row align-items-stretch bg-cube pt-5 pb-5">
+              {portfolioItems}
+            </div>
       </div>
     );
   }

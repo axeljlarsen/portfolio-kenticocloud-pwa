@@ -32,7 +32,7 @@ let typeResolvers = [
 
 function isPreview() {
     var urlParams = new URLSearchParams(window.location.search);
-    var previewMode = urlParams.get('preview_mode') == 1 || urlParams.get('preview_mode') == ''; 
+    var previewMode = urlParams.get('preview_mode') == 1 || urlParams.get('preview_mode') == '' || urlParams.get('preview') == 1 || urlParams.get('preview') == ''; 
 
     return previewMode;
 }

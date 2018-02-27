@@ -53,7 +53,7 @@ class Portfolio extends Component {
       //   );
       // }
 
-      let link = '/webportfolio/' + portfolioItem.friendlyUrl.value;
+      let link = '/portfolio-embed/' + portfolioItem.friendlyUrl.value;
 
       let title = portfolioItem.title.value;
       let imageUrl = (portfolioItem.thumbnailImage.value.length) ? portfolioItem.thumbnailImage.value[0].url : '';
@@ -69,36 +69,36 @@ class Portfolio extends Component {
       let technologies = portfolioItem.technologies;
 
       result.push(
-        <div className="col col-sm-60 col-md-40 col-lg-30 mb-4" key={counter++}>
-        <div className="card card-portfolio-item h-100">
-          <Link to={link}>
-            <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
-          </Link>
-          <div className="card-body">
-            <span className="badge badge-secondary p-1 mb-2">{postDate}</span>
-            <h2 className="h4">
-              <Link to={link}>{title}</Link>
-            </h2>
-            <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
+        <div className="col col-sm-6 col-md-4 col-lg-3 mb-4" key={counter++}>
+          <div className="card card-portfolio-item h-100">
+            <Link to={link}>
+              <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
+            </Link>
+            <div className="card-body">
+              <span className="badge badge-secondary p-1 mb-2">{postDate}</span>
+              <h2 className="h4">
+                <Link to={link}>{title}</Link>
+              </h2>
+              <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
 
+            </div>
+            <div className="card-footer portfolioItem-tile-features">
+              {
+                portfolioItem.features.map((feature, index) => {
+                  if (feature) {
+                    let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
+                    let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
+                    return (
+                      <div className={"align-middle text-center " + ((portfolioItem.features.length > 1) ? "mb-2" : "")} key={index}>
+                        <img alt={featureImageDesc} className="img-responsive icon mr-2" src={featureImageUrl} title={featureImageDesc} />
+                        <span>{feature.caption.value}</span>
+                      </div>
+                    )
+                  }
+                })
+              }
+            </div>
           </div>
-          <div className="card-footer portfolioItem-tile-features">
-            {
-              portfolioItem.features.map((feature, index) => {
-                if (feature) {
-                  let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
-                  let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
-                  return (
-                    <div className={"align-middle text-center " + ((portfolioItem.features.length>1) ? "mb-2" : "")} key={index}>
-                      <img alt={featureImageDesc} className="img-responsive icon mr-2" src={featureImageUrl} title={featureImageDesc} />
-                      <span>{feature.caption.value}</span>
-                    </div>
-                  )
-                }
-              })
-            }
-          </div>
-        </div>
         </div>
       );
 
@@ -106,10 +106,8 @@ class Portfolio extends Component {
     }, []);
 
     return (
-      <div className="container-fluid">
-        <div className="row align-items-stretch bg-cube pt-5 pb-5">
-              {portfolioItems}
-            </div>
+      <div className="row align-items-stretch bg-cube pt-5 pb-5">
+        {portfolioItems}
       </div>
     );
   }

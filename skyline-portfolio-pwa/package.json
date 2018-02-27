@@ -24,6 +24,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
+    "build-start": "npm run build && npm run start",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "deploy": "npm run build && firebase deploy",
@@ -33,5 +34,5 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "homepage": "https://skylinetechnologies.com/webportfolio"
+  "homepage": "https://skylinetechnologies.com/portfolio-embed"
 }

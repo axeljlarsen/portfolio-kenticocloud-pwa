@@ -23,6 +23,7 @@ class PortfolioItem extends Component {
   componentDidMount() {
     PortfolioItemStore.addChangeListener(this.onChange);
     PortfolioItemStore.provideItem(this.props.match.params.urlSlug);
+    window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {
@@ -50,7 +51,7 @@ class PortfolioItem extends Component {
     let title = portfolioItem.title.value;
     let imageUrl = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].url : '';
     let imageDesc = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].description : '';
-    let postDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
+    let launchDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
     let description = portfolioItem.description;
     let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
     let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
@@ -58,6 +59,8 @@ class PortfolioItem extends Component {
     let lengthOfEngagement = portfolioItem.lengthOfEngagement.value;
     let technologies = portfolioItem.technologies;
     let deviceSectionCount = portfolioItem.deviceSections.length;
+
+    let bootstrapVersion = 3;
 
     // Move the main call to action into view when the user scrolls.
     window.addEventListener('scroll', function () {
@@ -112,15 +115,16 @@ class PortfolioItem extends Component {
         </div>
 
         <div className="container-fluid">
-          <div className="row">
-            <div className="col-12 offset-sm-1 col-sm-7 pt-5 pb-5">
-              <h1>{title}</h1>
-              <h2>{subtitle}</h2>
-              <RichTextElement className="portfolioItem-detail-content" element={description} />
+          <div className={((bootstrapVersion == 4) ? '' : 'bg-cube') + ' row'}>
+            <div className={((bootstrapVersion == 4) ? 'col-12 col-sm-7 offset-sm-1' : 'bg-white col-xs-12 col-sm-8') + ' pt-5 pb-5'}>
+              <div className="portfolioItem-detail-overview">
+                <h1>{title}</h1>
+                <h2>{subtitle}</h2>
+                <RichTextElement className="portfolioItem-detail-content" element={description} />
+              </div>
             </div>
-            <div className="col-12 col-sm-4 pt-5 pb-5 bg-cube portfolioItem-detail-features">
+            <div className={((bootstrapVersion == 4) ? 'col-12 bg-cube' : 'col-xs-12') + ' col-sm-4 pt-5 pb-5 portfolioItem-detail-features'}>
               <ul className="list-unstyled">
-                <li><strong>Launched:</strong> {postDate}</li>
                 <li><strong>Project Timeline:</strong> {lengthOfEngagement}</li>
                 <li><strong>Industry:</strong> {clientIndustry}</li>
               </ul>
@@ -150,7 +154,7 @@ class PortfolioItem extends Component {
             </div>
           </div>
           <div className="row bg-darkgray portfolioItem-detail-tech">
-            <div className="col-12 offset-sm-1 col-sm-10 mt-5">
+            <div className={((bootstrapVersion == 4) ? 'col-12 offset-sm-1' : 'col-xs-12 col-sm-offset-1') + ' col-sm-10 mt-5'}>
               <h3 className="text-tertiary">Technologies Used</h3>
               <div className="row">
                 {
@@ -159,7 +163,7 @@ class PortfolioItem extends Component {
                       let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
                       let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
                       return (
-                        <div className="col-6 col-sm-4 col-lg-3 mb-2" key={index}>
+                        <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
                           <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
                           {
                             technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
@@ -176,7 +180,7 @@ class PortfolioItem extends Component {
               </div>
             </div>
 
-            <div className="col-12 offset-sm-1 col-sm-10 mt-3 mb-5">
+            <div className={((bootstrapVersion == 4) ? 'col-12 offset-sm-1' : 'col-xs-12 col-sm-offset-1') + ' col-sm-10 mt-3 mb-5'}>
               <h3 className="text-primary"><small>Designed and Tested For</small></h3>
               <div className="row text-gray">
                 {
@@ -185,7 +189,7 @@ class PortfolioItem extends Component {
                       let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
                       let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
                       return (
-                        <div className="col-6 col-sm-4 col-lg-3 mb-2" key={index}>
+                        <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
                           <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
                           {
                             technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
@@ -208,33 +212,58 @@ class PortfolioItem extends Component {
               portfolioItem.deviceSections.map((section, index) => {
                 if (section) {
                   return (
-                    <div className="col-12" key={index}>
+                    <div className={(bootstrapVersion == 4) ? 'col-12' : 'col-xs-12'} key={index}>
                       <div className="row align-items-center align-self-center">
                         {
                           section.columns.map((column, index) => {
                             let dt = column.deviceType.value[0].codename;
-                            let cd =  column.contentDetails.value[0].codename;
+                            let cd = column.contentDetails.value[0].codename;
                             let dsc_class = 'col';
-                            switch (dt + ' ' + cd) {
-                              case 'monitor image_only':
-                              dsc_class = 'col-12 col-sm-5 offset-sm-1 col-lg-4 offset-lg-20';
-                              break;
-                              case 'monitor text_only':
-                              dsc_class = 'col-12 col-sm-5 col-lg-4';
-                              break;
-                              case 'phone image_only':
-                              dsc_class = 'order-sm-2 col-12 col-sm-3 col-md-2';
-                              break;
-                              case 'phone text_only':
-                              dsc_class = ((index == 2) ? 'order-sm-3' : 'order-sm-1') + ' col-12 col-sm';
-                              break;
-                              case 'tablet image_only':
-                              dsc_class = 'col-12 col-sm-7 order-sm-2 col-md-4';
-                              break;
-                              case 'tablet text_only':
-                              dsc_class = 'col-12 col-sm-5 order-sm-1 offset-md-3 col-md-3';
-                              break;
+                            if (bootstrapVersion == 4) {
+                              switch (dt + ' ' + cd) {
+                                case 'monitor image_only':
+                                  dsc_class = 'col-12 col-sm-5 offset-sm-1 col-lg-4 offset-lg-2';
+                                  break;
+                                case 'monitor text_only':
+                                  dsc_class = 'col-12 col-sm-5 col-lg-4';
+                                  break;
+                                case 'phone image_only':
+                                  dsc_class = 'order-sm-2 col-12 col-sm-3 col-md-2';
+                                  break;
+                                case 'phone text_only':
+                                  dsc_class = ((index == 2) ? 'order-sm-3' : 'order-sm-1') + ' col-12 col-sm';
+                                  break;
+                                case 'tablet image_only':
+                                  dsc_class = 'col-12 col-sm-5 col-lg-4 order-sm-2';
+                                  break;
+                                case 'tablet text_only':
+                                  dsc_class = 'col-12 col-sm-5 offset-sm-1 col-lg-4 offset-lg-2 order-sm-1';
+                                  break;
+                              }
                             }
+                            else {
+                              switch (dt + ' ' + cd) {
+                                case 'monitor image_only':
+                                  dsc_class = 'col-xs-12 col-sm-5 col-sm-offset-1 col-lg-4 col-lg-offset-2';
+                                  break;
+                                case 'monitor text_only':
+                                  dsc_class = 'col-xs-12 col-sm-5 col-lg-4';
+                                  break;
+                                case 'phone image_only':
+                                  dsc_class = 'col-xs-12 col-sm-4 col-sm-push-4 col-md-2 col-md-offset-1 col-md-push-4 ';
+                                  break;
+                                case 'phone text_only':
+                                  dsc_class = 'col-xs-12 col-sm-4 ' + ((index == 2) ? '' : 'col-sm-pull-4 col-md-pull-2');
+                                  break;
+                                case 'tablet image_only':
+                                  dsc_class = 'col-xs-12 col-sm-5 col-lg-4 col-sm-push-6';
+                                  break;
+                                case 'tablet text_only':
+                                  dsc_class = 'col-xs-12 col-sm-5 col-lg-4 col-sm-offset-1 col-sm-pull-5 col-lg-offset-3';
+                                  break;
+                              }
+                            }
+                            dsc_class += ' ' + dt + '-' + cd;
                             return (
                               <RichTextElement className={dsc_class} element={column.content} key={column.system.codename} />
                             )

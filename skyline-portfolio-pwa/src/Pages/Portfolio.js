@@ -54,11 +54,12 @@ class Portfolio extends Component {
       // }
 
       let link = '/portfolio-embed/' + portfolioItem.friendlyUrl.value;
+      let bootstrapVersion = 3;
 
       let title = portfolioItem.title.value;
       let imageUrl = (portfolioItem.thumbnailImage.value.length) ? portfolioItem.thumbnailImage.value[0].url : '';
       let imageDesc = (portfolioItem.thumbnailImage.value.length) ? portfolioItem.thumbnailImage.value[0].description : '';
-      let postDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
+      let launchDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
       let description = {
         value: shorten(portfolioItem.description.value.replace(/(<([^>]+)>)/ig, ''), 97).concat('...')
       };
@@ -69,13 +70,12 @@ class Portfolio extends Component {
       let technologies = portfolioItem.technologies;
 
       result.push(
-        <div className="col col-sm-6 col-md-4 col-lg-3 mb-4" key={counter++}>
+        <div className={ bootstrapVersion == 4 ? "col" : "col-xs-12" + " col-sm-6 col-md-4 col-lg-3 mb-4"} key={counter++}>
           <div className="card card-portfolio-item h-100">
             <Link to={link}>
               <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
             </Link>
             <div className="card-body">
-              <span className="badge badge-secondary p-1 mb-2">{postDate}</span>
               <h2 className="h4">
                 <Link to={link}>{title}</Link>
               </h2>

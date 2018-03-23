@@ -7,3 +7,5 @@ $font-family-sans-serif: Roboto Condensed,sans-serif;
 //$font-weight-base: 300 !default;
 $headings-font-weight : 300 !default;
 $grid-columns: 12;
+
+$grid-breakpoints: ( xs: 0, sm: 768px, md: 992px, lg: 1200px) !default;

@@ -53,6 +53,7 @@ class PortfolioItem extends Component {
     let imageDesc = (portfolioItem.largeImage.value.length) ? portfolioItem.largeImage.value[0].description : '';
     let launchDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
     let description = portfolioItem.description;
+    let caseStudy = portfolioItem.skylineCaseStudyUrl;
     let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
     let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
     let subtitle = portfolioItem.subtitle.value;
@@ -105,7 +106,7 @@ class PortfolioItem extends Component {
       <portfolioItem className="portfolioItem-detail portfolioItem-detail-related-box">
 
         <div className="cta text">
-          <Link to={`/portfolio-embed/`}>
+          <Link to={`/portfolio/`}>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.4 22.3"><title>icon-left-arrow</title><path d="M18.87,28.68a.74.74,0,0,1-.45.15.59.59,0,0,1-.4-.15L7.47,18.08a.51.51,0,0,1-.1-.7.47.47,0,0,1,.1-.1L18,6.68a.5.5,0,0,1,.4-.15.74.74,0,0,1,.45.15l.35.4a.53.53,0,0,1,.15.4.74.74,0,0,1-.15.45l-8.95,8.9h18.8a.6.6,0,0,1,.6.6h0v.5a.6.6,0,0,1-.6.6H10.27l9,8.9a.72.72,0,0,1,.15.45.54.54,0,0,1-.15.4Z" transform="translate(-7.27 -6.53)" /></svg>
           </Link>
         </div >
@@ -113,7 +114,7 @@ class PortfolioItem extends Component {
         <div className="portfolioItem-detail-image">
           <img alt={imageDesc} className="img-responsive" src={imageUrl} title={imageDesc} />
         </div>
-
+        
         <div className="container-fluid">
           <div className={((bootstrapVersion == 4) ? '' : 'bg-cube') + ' row'}>
             <div className={((bootstrapVersion == 4) ? 'col-12 col-sm-7 offset-sm-1' : 'bg-white col-xs-12 col-sm-8') + ' pt-5 pb-5'}>
@@ -123,7 +124,7 @@ class PortfolioItem extends Component {
                 <RichTextElement className="portfolioItem-detail-content" element={description} />
               </div>
             </div>
-            <div className={((bootstrapVersion == 4) ? 'col-12 bg-cube' : 'col-xs-12') + ' col-sm-4 pt-5 pb-5 portfolioItem-detail-features'}>
+            <div className={((bootstrapVersion == 4) ? 'col-12 bg-cube' : 'col-xs-12') + ' col-sm-4 portfolioItem-detail-features'}>
               <ul className="list-unstyled">
                 <li><strong>Project Timeline:</strong> {lengthOfEngagement}</li>
                 <li><strong>Industry:</strong> {clientIndustry}</li>
@@ -151,58 +152,65 @@ class PortfolioItem extends Component {
                   }
                 </tbody>
               </table>
+              <a href={caseStudy.value} className="btn btn-primary btn-lg case-study-link">View Case Study</a>
             </div>
           </div>
-          <div className="row bg-darkgray portfolioItem-detail-tech">
-            <div className={((bootstrapVersion == 4) ? 'col-12 offset-sm-1' : 'col-xs-12 col-sm-offset-1') + ' col-sm-10 mt-5'}>
-              <h3 className="text-tertiary">Technologies Used</h3>
-              <div className="row">
-                {
-                  portfolioItem.technologies.map((technology, index) => {
-                    if (technology) {
-                      let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
-                      let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
-                      return (
-                        <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
-                          <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                          {
-                            technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
-                              return (
-                                <span key={technicalSkill.codename}>{technicalSkill.name}</span>
-                              )
-                            })
-                          }
-                        </div>
-                      )
+          <div className="row">
+            <div className={((bootstrapVersion == 4) ? 'col col-sm-10 offset-sm-1 py-0' : 'col-xs-12 col-sm-10 col-sm-offset-1 py-0')}>
+              <div className="row portfolioItem-detail-tech">
+                <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' neg-space-col'}><div className="neg-space-shape"></div><div className="neg-space-shape"></div></div>
+                <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12')}>
+                  <h3 className="heading heading-tech">Technologies Used</h3>
+                  <div className="row">
+                    {
+                      portfolioItem.technologies.map((technology, index) => {
+                        if (technology) {
+                          let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
+                          let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
+                          return (
+                            <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
+                              <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
+                              {
+                                technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
+                                  return (
+                                    <span key={technicalSkill.codename}>{technicalSkill.name}</span>
+                                  )
+                                })
+                              }
+                            </div>
+                          )
+                        }
+                      })
                     }
-                  })
-                }
-              </div>
-            </div>
+                  </div>
+                </div>
 
-            <div className={((bootstrapVersion == 4) ? 'col-12 offset-sm-1' : 'col-xs-12 col-sm-offset-1') + ' col-sm-10 mt-3 mb-5'}>
-              <h3 className="text-primary"><small>Designed and Tested For</small></h3>
-              <div className="row text-gray">
-                {
-                  portfolioItem.testedPlatforms.map((technology, index) => {
-                    if (technology) {
-                      let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
-                      let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
-                      return (
-                        <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
-                          <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                          {
-                            technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
-                              return (
-                                <span key={technicalSkill.codename}>{technicalSkill.name}</span>
-                              )
-                            })
-                          }
-                        </div>
-                      )
+                <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' mt-3 mb-5'}>
+                  <h3 className="heading heading-tested text-small">Designed and Tested For</h3>
+                  <div className="row">
+                    {
+                      portfolioItem.testedPlatforms.map((technology, index) => {
+                        if (technology) {
+                          let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
+                          let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
+                          return (
+                            <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
+                              <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
+                              {
+                                technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
+                                  return (
+                                    <span className="text-gray" key={technicalSkill.codename}>{technicalSkill.name}</span>
+                                  )
+                                })
+                              }
+                            </div>
+                          )
+                        }
+                      })
                     }
-                  })
-                }
+                  </div>
+                </div>
+                <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' neg-space-col'}><div className="neg-space-shape"></div><div className="neg-space-shape"></div></div>
               </div>
             </div>
           </div>

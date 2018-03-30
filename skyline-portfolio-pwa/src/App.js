@@ -11,9 +11,9 @@ const App = (props) => {
   return (
     <div>
       <Switch>
-        <Route exact path="/portfolio-embed/" render={(matchProps) => <Portfolio  {...matchProps} language={props.language} />} />
-        <Route path="/portfolio-embed/:urlSlug" render={(matchProps) => <PortfolioItem {...matchProps} language={props.language} />} />
-        <Route path="*" render={(props) => { return <Redirect to="/portfolio-embed/" push /> }} />
+        <Route exact path="/portfolio/" render={(matchProps) => <Portfolio  {...matchProps} language={props.language} />} />
+        <Route path="/portfolio/:urlSlug" render={(matchProps) => <PortfolioItem {...matchProps} language={props.language} />} />
+        <Route path="*" render={(props) => { return <Redirect to="/portfolio/" push /> }} />
       </Switch>
     </div>
   );

@@ -53,7 +53,7 @@ class Portfolio extends Component {
       //   );
       // }
 
-      let link = '/portfolio-embed/' + portfolioItem.friendlyUrl.value;
+      let link = '/portfolio/' + portfolioItem.friendlyUrl.value;
       let bootstrapVersion = 3;
 
       let title = portfolioItem.title.value;
@@ -70,7 +70,7 @@ class Portfolio extends Component {
       let technologies = portfolioItem.technologies;
 
       result.push(
-        <div className={ bootstrapVersion == 4 ? "col" : "col-xs-12" + " col-sm-6 col-md-4 col-lg-3 mb-4"} key={counter++}>
+        <div className={ bootstrapVersion == 4 ? 'col' : 'col-xs-12' + ' col-sm-6 col-md-4 col-lg-3'} key={counter++}>
           <div className="card card-portfolio-item h-100">
             <Link to={link}>
               <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
@@ -89,7 +89,7 @@ class Portfolio extends Component {
                     let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
                     let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
                     return (
-                      <div className={"align-middle text-center " + ((portfolioItem.features.length > 1) ? "mb-2" : "")} key={index}>
+                      <div className="align-middle text-center" key={index}>
                         <img alt={featureImageDesc} className="img-responsive icon mr-2" src={featureImageUrl} title={featureImageDesc} />
                         <span>{feature.caption.value}</span>
                       </div>
@@ -106,7 +106,7 @@ class Portfolio extends Component {
     }, []);
 
     return (
-      <div className="row align-items-stretch bg-cube pt-5 pb-5">
+      <div className="row portfolio-list align-items-stretch bg-cube pt-5 pb-5">
         {portfolioItems}
       </div>
     );

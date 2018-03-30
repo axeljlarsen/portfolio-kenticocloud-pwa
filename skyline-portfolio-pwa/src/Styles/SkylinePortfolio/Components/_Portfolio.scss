@@ -4,10 +4,10 @@
         font-size: 2em;
     }
     h2 {
-        font-size: 1.2em;
+        font-size: 1.25em;
     }
     h3 {
-        font-size: 1.6em;
+        font-size: 1.25;
     }
     .icon {
         max-height: 1.5em;
@@ -15,7 +15,7 @@
     }
     .portfolioItem-detail-image {
         position: relative;
-        max-height: 25vh;
+        max-height: 40vh;
         min-height: 20rem;
         overflow: hidden;
         @media (min-width: map-get($grid-breakpoints, sm)) {
@@ -37,19 +37,16 @@
                 transform: translateX(-50%);
             }
         }
-    } // .portfolioItem-detail-image:hover img {
-    //     top: 50%;
-    //     left: 50%;
-    //     transform: translate(-50%, -50%) scale(1.25);
-    //     @media (min-width: map-get($grid-breakpoints, sm)) {
-    //         transform: translateX(-50%) scale(1.25);
-    //     }
-    // }
+    }
     .portfolioItem-detail-content {
         color: $gray-1000;
     }
+    $neg-size: 3rem;
     .portfolioItem-detail-features {
         font-weight: $font-weight-light;
+        padding-top: $neg-size;
+        padding-right: 7%;
+        padding-bottom: $neg-size * 2;
         table {
             tbody {
                 tr {
@@ -60,24 +57,147 @@
             }
         }
     }
+    .case-study-link {
+        padding: 0.25em 0.75em;
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        border-radius: 2em;
+        box-shadow: 0.1em 0.2em 0.2em rgba(0, 0, 0, 0.15);
+        transition: background 0.3s, box-shadow 0.3s;
+        &:hover,
+        &:focus {
+            box-shadow: 0.15em 0.25em 0.4em rgba(0, 0, 0, 0.3);
+        }
+        &:active {
+            box-shadow: inset 0.1em 0.2em 0.2em rgba(0, 0, 0, 0.1);
+        }
+    }
+    @media (min-width: map-get($grid-breakpoints, sm)) {
+        $shift: 3em;
+        .portfolioItem-detail-overview {
+            margin-bottom: $shift;
+        }
+        .portfolioItem-detail-tech {
+            margin-top: -1 * $shift;
+        }
+    }
+    .portfolioItem-detail-tech {
+        $bg: $gray-1000;
+        $neg-bg: $white;
+        margin-left: -3rem;
+        margin-right: -3rem;
+        background-color: $bg;
+        color: $white;
+        text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.2); //box-shadow: 0em 0.5em 1em rgba(0, 0, 0, 0.2);
+        >.col,
+        >[class*="col-"] {
+            padding-left: 3rem;
+            padding-right: 3rem;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            color: inherit;
+        }
+        .heading-tech {
+            margin-bottom: 0.5em;
+            color: $tertiary;
+        }
+        .heading-tested {
+            margin-bottom: 0.6em;
+            font-size: 1em;
+            color: $primary;
+        }
+        .neg-space-col {
+            padding: 0;
+            @media (min-width: map-get($grid-breakpoints, sm)) {
+                display: none;
+                +* {
+                    margin-top: 3rem;
+                }
+            }
+        }
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+            box-shadow: 0.25em 0.25em 1em rgba(0, 0, 0, 0.5);
+            margin-bottom: 1em;
+            .neg-space-col {
+                display: none;
+                +* {
+                    margin-top: 3rem;
+                }
+            }
+        }
+        .neg-space-shape {
+            width: calc(50% - #{$neg-size});
+            height: $neg-size;
+            background: $neg-bg;
+            position: relative;
+            float: left;
+        }
+        .neg-space-shape:last-child {
+            float: right;
+        }
+        .neg-space-shape:after {
+            content: ' ';
+            position: absolute;
+            top: 0;
+            right: -$neg-size;
+            z-index: 1;
+            width: $neg-size;
+            height: $neg-size;
+            border: ($neg-size/2) solid $neg-bg;
+            border-top-color: transparent;
+            border-right-color: transparent;
+        }
+        .neg-space-shape:last-child:after {
+            left: -$neg-size;
+            right: auto;
+            border-right-color: $neg-bg;
+            border-left-color: transparent;
+        }
+        .neg-space-col:first-child {
+            margin-bottom: -$neg-size;
+            >.neg-space-shape {
+                top: -$neg-size;
+                background: $bg;
+                &:after {
+                    border-bottom-color: $bg;
+                }
+                &:first-child:after {
+                    border-left-color: $bg;
+                }
+                &:last-child:after {
+                    border-right-color: $bg;
+                }
+            }
+        }
+    }
     .portfolioItem-device-sections {
         img {
             max-height: 250px;
             max-height: 50vh;
         }
+        p:last-child {
+            margin-bottom: auto;
+        }
         > :nth-child(1n)>.row {
             text-align: center;
-            font-size: 2em;
+            font-size: 1.25em;
         }
         @media (min-width: map-get($grid-breakpoints, sm)) {
             > :nth-child(1n)>.row {
                 display: flex;
                 align-items: center;
-                text-align: left;
-                font-size: 1.25em;
+                text-align: left; //font-size: 1.25em;
             }
             > :nth-child(2n)>.row {
                 text-align: center;
+                min-height: 350px;
+                min-height: 35vh;
                 >.order-sm-1 {
                     transform: translateY(50%);
                 }
@@ -92,14 +212,18 @@
                 text-align: right;
             }
         }
-        @media (min-width: map-get($grid-breakpoints, md)) {
-            > :nth-child(1n)>.row {
-                font-size: 1.25em;
-            }
+        .monitor-text_only {
+            margin-top: 1em;
         }
-        @media (min-width: map-get($grid-breakpoints, lg)) {
-            > :nth-child(1n)>.row {
-                font-size: 1.5em;
+        @media (min-width: map-get($grid-breakpoints, sm)) {
+            .monitor-text_only {
+                margin-top: 0;
+            }
+            .phone-text_only {
+                margin-top: 5vh;
+            }
+            .phone-text_only+.phone-text_only {
+                margin-top: -5vh;
             }
         }
     }
@@ -145,3 +269,30 @@
         border-radius: 5.5em;
     }
 }
+
+/*
+// PARALLAX EFFECT ATTEMPTS
+.portfolioItem-detail .portfolioItem-detail-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30rem;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.portfolioItem-detail-image+.container-fluid {
+    margin-top: 200px;
+    background: white !important;
+    position: relative;
+    z-index: 2;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    width: auto !important;
+}
+
+.backToTop, footer {
+    position: relative;
+}
+*/

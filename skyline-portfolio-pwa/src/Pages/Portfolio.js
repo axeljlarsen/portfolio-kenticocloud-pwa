@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PortfolioItemStore from '../Stores/PortfolioItem';
+import PortfolioFilter from '../Components/PortfolioFilter';
 import Link from '../Components/LowerCaseUrlLink';
 import dateFormat from 'dateformat';
 import RichTextElement from '../Components/RichTextElement';
@@ -8,7 +9,8 @@ let portfolioItemCount = 10;
 
 let getState = () => {
   return {
-    portfolioItems: PortfolioItemStore.getItems(portfolioItemCount)
+    portfolioItems: PortfolioItemStore.getItems(portfolioItemCount),
+    filter: PortfolioItemStore.getFilter()
   };
 };
 
@@ -45,8 +47,11 @@ class Portfolio extends Component {
     };
 
     let counter = 0;
+    let filter = (portfolioItem) => {
+      return this.state.filter.matches(portfolioItem);
+    };
 
-    let portfolioItems = this.state.portfolioItems.reduce((result, portfolioItem, index) => {
+    let portfolioItems = this.state.portfolioItems.filter(filter).reduce((result, portfolioItem, index) => {
       // if (index % 3 === 0) {
       //   result.push(
       //     <div className="w-100" key={counter++}></div>
@@ -107,6 +112,8 @@ class Portfolio extends Component {
 
     return (
       <div className="row portfolio-list align-items-stretch bg-cube pt-5 pb-5">
+      
+      <PortfolioFilter />
         {portfolioItems}
       </div>
     );

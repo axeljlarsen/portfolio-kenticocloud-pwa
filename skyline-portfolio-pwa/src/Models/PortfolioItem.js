@@ -26,6 +26,8 @@ export class PortfolioItem extends ContentItem {
                         return 'testedPlatforms';
                     case 'thumbnail_image':
                         return 'thumbnailImage';
+                    case 'technical_and_business_skills':
+                        return 'techSkills';
                     default:
                         //client, title, subtitle, description, topic, service, features, technologies
                         return fieldName;

@@ -114,7 +114,7 @@ class PortfolioItem extends Component {
         <div className="portfolioItem-detail-image">
           <img alt={imageDesc} className="img-responsive" src={imageUrl} title={imageDesc} />
         </div>
-        
+
         <div className="container-fluid">
           <div className={((bootstrapVersion == 4) ? '' : 'bg-cube') + ' row'}>
             <div className={((bootstrapVersion == 4) ? 'col-12 col-sm-7 offset-sm-1' : 'bg-white col-xs-12 col-sm-8') + ' pt-5 pb-5'}>
@@ -152,7 +152,7 @@ class PortfolioItem extends Component {
                   }
                 </tbody>
               </table>
-              <a href={caseStudy.value} className="btn btn-primary btn-lg case-study-link">View Case Study</a>
+              <a href={caseStudy.value} className={(caseStudy.value.length == 0) ? 'hide' : 'btn btn-primary btn-lg case-study-link'}>View Case Study</a>
             </div>
           </div>
           <div className="row">
@@ -170,13 +170,7 @@ class PortfolioItem extends Component {
                           return (
                             <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
                               <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                              {
-                                technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
-                                  return (
-                                    <span key={technicalSkill.codename}>{technicalSkill.name}</span>
-                                  )
-                                })
-                              }
+                              <span>{technology.name.value}</span>
                             </div>
                           )
                         }
@@ -196,13 +190,7 @@ class PortfolioItem extends Component {
                           return (
                             <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
                               <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                              {
-                                technology.technicalSkill.taxonomyTerms.map((technicalSkill, index) => {
-                                  return (
-                                    <span className="text-gray" key={technicalSkill.codename}>{technicalSkill.name}</span>
-                                  )
-                                })
-                              }
+                              <span className="text-gray">{technology.name.value}</span>
                             </div>
                           )
                         }

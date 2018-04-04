@@ -7,20 +7,46 @@ let systemType = "portfolio_item";
 let depth = 10;
 let items = [];
 let changeListeners = [];
-
+let techAndBusSkills = [];
 let notifyChange = () => {
     changeListeners.forEach((listener) => {
         listener();
     });
 }
 
-let fetchItems = (privateItems) => {    
+let fetchTechAndBusSkills = () => {
     var urlParams = new URLSearchParams(window.location.search);
-    if (!privateItems) privateItems = urlParams.get('private_items') == 1 || urlParams.get('private_items') == ''; 
+    
+    var query = Client.taxonomy('technical_and_business_skills');
+
+    query.get()
+        .subscribe(response => {
+            techAndBusSkills = response.taxonomy.terms;
+            notifyChange();
+        }, err => {
+        });
+};
+let fetchTechnologies = () => {
+    var urlParams = new URLSearchParams(window.location.search);
+    
+    var query = Client.items()
+        .type('portfolio_item_technology')
+        .depthParameter(depth);
+
+    query.get()
+        .subscribe(response => {
+            techAndBusSkills = response.items;
+            notifyChange();
+        }, err => {
+        });
+}
+let fetchItems = (privateItems) => {
+    var urlParams = new URLSearchParams(window.location.search);
+    if (!privateItems) privateItems = urlParams.get('private_items') == 1 || urlParams.get('private_items') == '';
 
     var query = Client.items()
         .type(systemType)
-        .orderParameter('elements.actual_launch_date',SortOrder.desc)
+        .orderParameter('elements.actual_launch_date', SortOrder.desc)
         .depthParameter(depth);
 
     if (privateItems) {
@@ -74,6 +100,58 @@ let setItemsToStorage = (items) => {
     localforage.setItem(systemType, objectToStore);
 }
 
+
+export class Filter {
+    constructor() {
+        this.techAndBusSkills = [];
+        this.productStatuses = [];
+    }
+
+    matches(portfolioItem) {
+        return this.matchesTechAndBusSkillsTaxonomy(portfolioItem);
+        //return this.matchesTechnologies(portfolioItem);
+    }
+
+    matchesTechAndBusSkillsTaxonomy(portfolioItem) {
+        if (this.techAndBusSkills.length === 0) {
+            return true;
+        }
+
+      // Go through each technology assigned to the portfolio item
+      // and push the codename of the taxonomy term assigned to that technology
+      // to an array. Use that array to determine if the portfolio item
+      // matches a skill to the filter's selected criteria.
+      let portItemSkills = [];
+      portfolioItem.technologies.forEach(({technicalSkill}) => 
+      technicalSkill.value.forEach(({codename}) => 
+      portItemSkills.push(codename)));
+
+      return this.techAndBusSkills.some(x => portItemSkills.includes(x));
+    }
+    matchesTechnologies(portfolioItem) {
+
+        if (this.techAndBusSkills.length === 0) {
+            return true;
+        }
+
+      // Go through each technology assigned to the portfolio item
+      // and push the codename to an array. Use that array to determine if the portfolio item
+      // matches a skill to the filter's selected criteria.
+      let portItemSkills = [];
+      portfolioItem.technologies.forEach(({system}) => portItemSkills.push(system.codename));
+      portfolioItem.testedPlatforms.forEach(({system}) => portItemSkills.push(system.codename));
+
+      return this.techAndBusSkills.some(x => portItemSkills.includes(x));
+    }
+
+    toggleTechAndBusSkills(skills) {
+        let index = this.techAndBusSkills.indexOf(skills);
+
+        if (index < 0) this.techAndBusSkills.push(skills); else this.techAndBusSkills.splice(index, 1);
+    }   
+}
+
+let technologyFilter = new Filter();
 class PortfolioItemStore {
 
     // Actions
@@ -86,15 +164,32 @@ class PortfolioItemStore {
         fetchItems();
     }
 
+    provideTechAndBusSkills() {
+        fetchTechAndBusSkills();
+        //fetchTechnologies();
+    }
+
     // Methods
 
-    getItem(urlSlug) {
-        //return itemDetails[urlSlug];        
+    getItem(urlSlug) {     
         return items.find((item) => item.friendlyUrl.value === urlSlug);
     }
 
     getItems(count) {
         return items.slice(0, count);
+    }
+
+    getTechAndBusSkills() {
+        return techAndBusSkills;
+    }
+
+    getFilter() {
+      return technologyFilter;
+    }
+  
+    setFilter(filter) {
+      technologyFilter = filter;
+      notifyChange();
     }
 
     // Listeners

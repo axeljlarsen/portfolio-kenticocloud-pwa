@@ -6,28 +6,22 @@ export class PortfolioItemTechnology extends ContentItem {
     constructor() {
         super({
             propertyResolver: ((fieldName) => {
-
-                if (fieldName === 'color_with_drop_shadow_icon') {
-                    return 'colorWithDropShadowIcon';
-                }
-                if (fieldName === 'color_icon') {
-                    return 'colorIcon';
-                }
-
-                if (fieldName === 'large_color_icon') {
-                    return 'largeColorIcon';
-                }
-
-                if (fieldName === 'black___white_icon') {
-                    return 'blackWhiteIcon';
-                }
-
-                if (fieldName === 'large_black___white_icon') {
-                    return 'largeBlackWhiteIcon';
-                }
-
-                if (fieldName === 'technical_and_business_skills') {
-                    return 'technicalSkill';
+                switch (fieldName) {
+                    case 'color_with_drop_shadow_icon':
+                        return 'colorWithDropShadowIcon';
+                    case 'color_icon':
+                        return 'colorIcon';
+                    case 'large_color_icon':
+                        return 'largeColorIcon';
+                    case 'black___white_icon':
+                        return 'blackWhiteIcon';
+                    case 'large_black___white_icon':
+                        return 'largeBlackWhiteIcon';
+                    case 'technical_and_business_skills':
+                        return 'technicalSkill';                    
+                    default:
+                        //name
+                        return fieldName;
                 }
             }),
             linkResolver: (link) => resolveContentLink(link)

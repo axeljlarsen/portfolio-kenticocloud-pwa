@@ -8,6 +8,7 @@ import { PortfolioItemFeature } from './Models/PortfolioItemFeature'
 import { PortfolioItemTechnology } from './Models/PortfolioItemTechnology'
 import { PortfolioItemDeviceSection } from './Models/PortfolioItemDeviceSection'
 import { PortfolioItemDeviceSectionColumn } from './Models/PortfolioItemDeviceSectionColumn'
+import { PortfolioItemService } from './Models/PortfolioItemService'
 import { SkylineClient } from './Models/SkylineClient'
 // import { PortfolioItem } from './Models/portfolio_item'
 // import { PortfolioItemFeature } from './Models/portfolio_item_feature'
@@ -27,6 +28,7 @@ let typeResolvers = [
     new TypeResolver('portfolio_item_technology', () => new PortfolioItemTechnology()),
     new TypeResolver('portfolio_item_device_section', () => new PortfolioItemDeviceSection()),
     new TypeResolver('portfolio_item_device_section_column', () => new PortfolioItemDeviceSectionColumn()),
+    new TypeResolver('portfolio_item_service', () => new PortfolioItemService()),
   new TypeResolver('client', ()=> new SkylineClient())
 ];
 

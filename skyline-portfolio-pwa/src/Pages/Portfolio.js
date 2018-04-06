@@ -69,7 +69,7 @@ class Portfolio extends Component {
       let technologies = portfolioItem.technologies;
 
       result.push(
-        <div className="col col-sm-60 col-md-40 col-lg-30 mb-4" key={counter++}>
+        <div className="col col-sm-6 col-md-4 col-lg-3 mb-4" key={counter++}>
         <div className="card card-portfolio-item h-100">
           <Link to={link}>
             <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />

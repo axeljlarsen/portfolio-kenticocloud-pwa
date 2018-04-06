@@ -114,6 +114,9 @@ class Portfolio extends Component {
 
       <div className="row bg-cube pt-5 pb-5">
         <div className={bootstrapVersion == 4 ? 'col-12' : 'col-xs-12'}>
+          <PortfolioFilter />
+        </div>
+        <div className={bootstrapVersion == 4 ? 'col-12' : 'col-xs-12'}>
           <div className="row portfolio-list align-items-stretch">
             {portfolioItems}
           </div>

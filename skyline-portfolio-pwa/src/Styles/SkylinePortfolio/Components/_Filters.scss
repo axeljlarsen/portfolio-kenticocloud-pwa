@@ -1,0 +1,95 @@
+.filter-panel {
+    display: block;
+}
+
+.filter-control {
+    position: relative;
+    display: inline-block;
+    min-width: 29rem;
+    font-size: 0.8em;
+    
+}
+
+.filter-options {
+    padding-left: 0;
+}
+
+.filter-option {
+    padding-left: 1em;
+    padding-right: 1em;
+    list-style: none;
+    white-space: nowrap;
+    .filter-option {
+        padding-left: 3em;
+    }
+    label {
+        white-space: normal;
+    }
+}
+
+.filter-control-btn {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    border: 1px solid rgba(0, 0, 0, 0.0);
+    box-shadow: none;
+    background: transparent;
+    transition: background 0.25s, border 0.25s, padding 0.25s;
+}
+.filter-control-btn.active {    
+    border: 1px solid rgba(0, 0, 0, 0.075);
+    background: $white;
+    box-shadow: 0.33em 0.66em 1em rgba(0, 0, 0, 0.1);
+}
+
+.filter-control-btn,
+.filter-option-panel {
+    padding: 0.66em 1em;
+}
+
+.filter-option-panel {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    height: 0;
+    padding: 0;
+    border-color: rgba(0, 0, 0, 0.075);
+    overflow: hidden;
+    background: $white;
+    transition: height 0.25s, padding 0.25s, border 0.25s;
+    box-shadow: 0.5em 0.5em 0.5em rgba(0, 0, 0, 0.33);
+    &.open {
+        height: 600px;
+        height: 40vh;
+        padding: 1em 0;
+        border: 1px solid rgba(0, 0, 0, 0.075);
+        border-top: 0;
+        overflow: auto;
+    }
+    ul {
+        margin-bottom: auto;
+    }
+    ul>li>ul {
+        padding-left: 0;
+        margin: auto -1em;
+    }
+    .radio,
+    .checkbox {
+        margin: auto;
+    }
+}
+
+.filter-option .radio input[type="radio"],
+.filter-option .checkbox input[type="checkbox"] {
+    position: static;
+    margin: auto !important;
+    +label {
+        padding: 0;
+        padding-left: 0.5em;
+    }
+    &:checked+label {
+        color: $primary;
+    }
+}

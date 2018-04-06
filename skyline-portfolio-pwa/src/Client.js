@@ -9,6 +9,7 @@ import { PortfolioItemTechnology } from './Models/PortfolioItemTechnology'
 import { PortfolioItemDeviceSection } from './Models/PortfolioItemDeviceSection'
 import { PortfolioItemDeviceSectionColumn } from './Models/PortfolioItemDeviceSectionColumn'
 import { SkylineClient } from './Models/SkylineClient'
+import { PortfolioItemService } from './Models/PortfolioItemService';
 // import { PortfolioItem } from './Models/portfolio_item'
 // import { PortfolioItemFeature } from './Models/portfolio_item_feature'
 // import { PortfolioItemTechnology } from './Models/portfolio_item_technology'
@@ -22,19 +23,20 @@ const previewApiKey = "ew0KICAiYWxnIjogIkhTMjU2IiwNCiAgInR5cCI6ICJKV1QiDQp9.ew0K
 
 // configure type resolvers
 let typeResolvers = [
-    new TypeResolver('portfolio_item', () => new PortfolioItem()),
-    new TypeResolver('portfolio_item_feature', () => new PortfolioItemFeature()),
-    new TypeResolver('portfolio_item_technology', () => new PortfolioItemTechnology()),
-    new TypeResolver('portfolio_item_device_section', () => new PortfolioItemDeviceSection()),
-    new TypeResolver('portfolio_item_device_section_column', () => new PortfolioItemDeviceSectionColumn()),
-  new TypeResolver('client', ()=> new SkylineClient())
+  new TypeResolver('portfolio_item', () => new PortfolioItem()),
+  new TypeResolver('portfolio_item_feature', () => new PortfolioItemFeature()),
+  new TypeResolver('portfolio_item_technology', () => new PortfolioItemTechnology()),
+  new TypeResolver('portfolio_item_device_section', () => new PortfolioItemDeviceSection()),
+  new TypeResolver('portfolio_item_device_section_column', () => new PortfolioItemDeviceSectionColumn()),
+  new TypeResolver('portfolio_item_service', () => new PortfolioItemService()),
+  new TypeResolver('client', () => new SkylineClient())
 ];
 
 function isPreview() {
-    var urlParams = new URLSearchParams(window.location.search);
-    var previewMode = urlParams.get('preview_mode') == 1 || urlParams.get('preview_mode') == '' || urlParams.get('preview') == 1 || urlParams.get('preview') == ''; 
+  var urlParams = new URLSearchParams(window.location.search);
+  var previewMode = urlParams.get('preview_mode') == 1 || urlParams.get('preview_mode') == '' || urlParams.get('preview') == 1 || urlParams.get('preview') == '';
 
-    return previewMode;
+  return previewMode;
 }
 
 export default new DeliveryClient(

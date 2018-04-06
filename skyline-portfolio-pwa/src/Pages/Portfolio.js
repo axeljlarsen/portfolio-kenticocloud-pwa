@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PortfolioItemStore from '../Stores/PortfolioItem';
-import PortfolioFilter from '../Components/PortfolioFilter';
+import PortfolioFilter from '../Components/Filters/PortfolioFilter';
 import Link from '../Components/LowerCaseUrlLink';
 import dateFormat from 'dateformat';
 import RichTextElement from '../Components/RichTextElement';
 
 let portfolioItemCount = 10;
+let bootstrapVersion = 3;
 
 let getState = () => {
   return {
@@ -59,7 +60,6 @@ class Portfolio extends Component {
       // }
 
       let link = '/portfolio/' + portfolioItem.friendlyUrl.value;
-      let bootstrapVersion = 3;
 
       let title = portfolioItem.title.value;
       let imageUrl = (portfolioItem.thumbnailImage.value.length) ? portfolioItem.thumbnailImage.value[0].url : '';
@@ -75,7 +75,7 @@ class Portfolio extends Component {
       let technologies = portfolioItem.technologies;
 
       result.push(
-        <div className={ bootstrapVersion == 4 ? 'col' : 'col-xs-12' + ' col-sm-6 col-md-4 col-lg-3'} key={counter++}>
+        <div className={bootstrapVersion == 4 ? 'col' : 'col-xs-12' + ' col-sm-6 col-md-4 col-lg-3'} key={counter++}>
           <div className="card card-portfolio-item h-100">
             <Link to={link}>
               <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
@@ -111,10 +111,16 @@ class Portfolio extends Component {
     }, []);
 
     return (
-      <div className="row portfolio-list align-items-stretch bg-cube pt-5 pb-5">
-      
-      <PortfolioFilter />
-        {portfolioItems}
+
+      <div className="row bg-cube pt-5 pb-5">
+        <div className={bootstrapVersion == 4 ? 'col-12' : 'col-xs-12'}>
+          <PortfolioFilter />
+        </div>
+        <div className={bootstrapVersion == 4 ? 'col-12' : 'col-xs-12'}>
+          <div className="row portfolio-list align-items-stretch">
+            {portfolioItems}
+          </div>
+        </div>
       </div>
     );
   }

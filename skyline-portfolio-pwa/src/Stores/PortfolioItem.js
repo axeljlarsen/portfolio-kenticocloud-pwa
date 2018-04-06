@@ -8,15 +8,17 @@ let depth = 10;
 let items = [];
 let changeListeners = [];
 let techAndBusSkills = [];
+let services = [];
+let features = [];
 let notifyChange = () => {
     changeListeners.forEach((listener) => {
         listener();
     });
 }
 
-let fetchTechAndBusSkills = () => {
+let fetchTechAndBusSkillsTaxonomyTerms = () => {
     var urlParams = new URLSearchParams(window.location.search);
-    
+
     var query = Client.taxonomy('technical_and_business_skills');
 
     query.get()
@@ -26,16 +28,28 @@ let fetchTechAndBusSkills = () => {
         }, err => {
         });
 };
-let fetchTechnologies = () => {
+let fetchServiceTaxonomyTerms = () => {
     var urlParams = new URLSearchParams(window.location.search);
-    
+
+    var query = Client.taxonomy('services');
+
+    query.get()
+        .subscribe(response => {
+            services = response.taxonomy.terms;
+            notifyChange();
+        }, err => {
+        });
+}
+let fetchFeatures = () => {
+    var urlParams = new URLSearchParams(window.location.search);
+
     var query = Client.items()
-        .type('portfolio_item_technology')
+        .type('portfolio_item_feature')
         .depthParameter(depth);
 
     query.get()
         .subscribe(response => {
-            techAndBusSkills = response.items;
+            features = response.items;
             notifyChange();
         }, err => {
         });
@@ -104,54 +118,101 @@ let setItemsToStorage = (items) => {
 export class Filter {
     constructor() {
         this.techAndBusSkills = [];
-        this.productStatuses = [];
+        this.services = [];
+        this.features = [];
     }
 
     matches(portfolioItem) {
-        return this.matchesTechAndBusSkillsTaxonomy(portfolioItem);
+        return this.matchesTechAndBusSkillsTaxonomy(portfolioItem) && this.matchesServicesTaxonomy(portfolioItem);
         //return this.matchesTechnologies(portfolioItem);
     }
 
     matchesTechAndBusSkillsTaxonomy(portfolioItem) {
-        if (this.techAndBusSkills.length === 0) {
-            return true;
-        }
-
-      // Go through each technology assigned to the portfolio item
-      // and push the codename of the taxonomy term assigned to that technology
-      // to an array. Use that array to determine if the portfolio item
-      // matches a skill to the filter's selected criteria.
-      let portItemSkills = [];
-      portfolioItem.technologies.forEach(({technicalSkill}) => 
-      technicalSkill.value.forEach(({codename}) => 
-      portItemSkills.push(codename)));
-
-      return this.techAndBusSkills.some(x => portItemSkills.includes(x));
-    }
-    matchesTechnologies(portfolioItem) {
 
         if (this.techAndBusSkills.length === 0) {
             return true;
         }
 
-      // Go through each technology assigned to the portfolio item
-      // and push the codename to an array. Use that array to determine if the portfolio item
-      // matches a skill to the filter's selected criteria.
-      let portItemSkills = [];
-      portfolioItem.technologies.forEach(({system}) => portItemSkills.push(system.codename));
-      portfolioItem.testedPlatforms.forEach(({system}) => portItemSkills.push(system.codename));
+        // Go through each technology assigned to the portfolio item
+        // and push the codename of the taxonomy term assigned to that technology
+        // to an array. Use that array to determine if the portfolio item
+        // matches a skill to the filter's selected criteria.
+        let portItemSkills = [];
+        portfolioItem.technologies.forEach(({ technicalSkill }) =>
+            technicalSkill.value.forEach(({ codename }) =>
+                portItemSkills.push(codename)));
 
-      return this.techAndBusSkills.some(x => portItemSkills.includes(x));
+        return this.techAndBusSkills.some(x => portItemSkills.includes(x));
     }
 
-    toggleTechAndBusSkills(skills) {
-        let index = this.techAndBusSkills.indexOf(skills);
+    matchesServicesTaxonomy(portfolioItem) {
 
-        if (index < 0) this.techAndBusSkills.push(skills); else this.techAndBusSkills.splice(index, 1);
-    }   
+        if (this.services.length === 0) {
+            return true;
+        }
+
+        let terms = [];
+
+        if (portfolioItem.services.length ) {
+            portfolioItem.services.forEach(({services}) => 
+               services.value.forEach(({codename}) =>
+                    terms.push(codename)));
+            //terms.push(portfolioItem.services[0].services.value[0].codename);
+            return this.services.some(x => terms.includes(x));
+        }
+
+        return true;
+    }
+
+    matchesFeatures(portfolioItem) {
+
+        if (this.features.length === 0) {
+            return true;
+        }
+
+        // Go through each technology assigned to the portfolio item
+        // and push the codename to an array. Use that array to determine if the portfolio item
+        // matches a skill to the filter's selected criteria.
+        let terms = [];
+        portfolioItem.features.forEach(({ system }) => terms.push(system.codename));
+
+        return this.features.some(x => terms.includes(x));
+    }
+
+    toggleTechAndBusSkills(terms, filter) {
+        let that = filter || this;
+        let index = that.techAndBusSkills.indexOf(terms);
+        if (index < 0) {
+            that.techAndBusSkills.push(terms);
+        }
+        else {
+            that.techAndBusSkills.splice(index, 1);
+        }
+    }
+    toggleServices(terms, filter) {
+        let that = filter || this;
+        let index = that.services.indexOf(terms);
+        if (index < 0) {
+            that.services.push(terms);
+        }
+        else {
+            that.services.splice(index, 1);
+        }
+    }
+    toggleFeatures(terms, filter) {
+        let that = filter || this;
+        let index = that.features.indexOf(terms);
+        if (index < 0) {
+            that.features.push(terms);
+        }
+        else {
+            that.features.splice(index, 1);
+        }
+    }
+
 }
 
-let technologyFilter = new Filter();
+let portfolioFilter = new Filter();
 class PortfolioItemStore {
 
     // Actions
@@ -165,13 +226,20 @@ class PortfolioItemStore {
     }
 
     provideTechAndBusSkills() {
-        fetchTechAndBusSkills();
-        //fetchTechnologies();
+        fetchTechAndBusSkillsTaxonomyTerms();
+    }
+
+    provideServices() {
+        fetchServiceTaxonomyTerms();
+    }
+
+    provideFeatures() {
+        fetchFeatures();
     }
 
     // Methods
-
-    getItem(urlSlug) {     
+ 
+    getItem(urlSlug) {
         return items.find((item) => item.friendlyUrl.value === urlSlug);
     }
 
@@ -183,13 +251,21 @@ class PortfolioItemStore {
         return techAndBusSkills;
     }
 
-    getFilter() {
-      return technologyFilter;
+    getServices() {
+        return services;
     }
-  
+
+    getFeatures() {
+        return features;
+    }
+
+    getFilter() {
+        return portfolioFilter;
+    }
+
     setFilter(filter) {
-      technologyFilter = filter;
-      notifyChange();
+        portfolioFilter = filter;
+        notifyChange();
     }
 
     // Listeners

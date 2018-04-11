@@ -18,7 +18,9 @@ export class PortfolioItemTechnology extends ContentItem {
                     case 'large_black___white_icon':
                         return 'largeBlackWhiteIcon';
                     case 'technical_and_business_skills':
-                        return 'technicalSkill';                    
+                        return 'technicalSkill';       
+                    case 'white_with_drop_shadow_icon':
+                        return 'whiteWithDropShadowIcon';             
                     default:
                         //name
                         return fieldName;

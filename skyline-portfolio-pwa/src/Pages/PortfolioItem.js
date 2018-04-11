@@ -116,8 +116,8 @@ class PortfolioItem extends Component {
         </div>
 
         <div className="container-fluid">
-          <div className={((bootstrapVersion == 4) ? '' : 'bg-cube') + ' row'}>
-            <div className={((bootstrapVersion == 4) ? 'col-12 col-sm-7 offset-sm-1' : 'bg-white col-xs-12 col-sm-8') + ' pt-5 pb-5'}>
+          <div className={((bootstrapVersion == 4) ? '' : 'bg-cube shadow-light-inset') + ' row'}>
+            <div className={((bootstrapVersion == 4) ? 'col-12 col-sm-7 offset-sm-1' : 'bg-white col-xs-12 col-sm-8') + ' portfolioItem-detail-summary'}>
               <div className="portfolioItem-detail-overview">
                 <h1>{title}</h1>
                 <h2>{subtitle}</h2>
@@ -185,12 +185,12 @@ class PortfolioItem extends Component {
                     {
                       portfolioItem.testedPlatforms.map((technology, index) => {
                         if (technology) {
-                          let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
-                          let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
+                          let technologyImageUrl = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].url : '';
+                          let technologyImageDesc = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].description : '';
                           return (
                             <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
                               <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
-                              <span className="text-gray">{technology.name.value}</span>
+                              <span className="">{technology.name.value}</span>
                             </div>
                           )
                         }

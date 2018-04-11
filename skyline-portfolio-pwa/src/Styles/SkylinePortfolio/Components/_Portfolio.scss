@@ -42,11 +42,18 @@
         color: $gray-1000;
     }
     $neg-size: 3rem;
+    .portfolioItem-detail-summary {
+        padding-top: 3rem;
+        padding-bottom: 6rem;
+        padding-right: 4.5rem;
+        box-shadow: 0.5em -0.5em 1em rgba(0,0,0,0.05)
+    }
     .portfolioItem-detail-features {
         font-weight: $font-weight-light;
         padding-top: $neg-size;
-        padding-right: 7%;
         padding-bottom: $neg-size * 2;
+        padding-left: 4.5rem;
+        padding-right: 7%;
         table {
             tbody {
                 tr {
@@ -81,12 +88,16 @@
             margin-top: -1 * $shift;
         }
     }
+   
     .portfolioItem-detail-tech {
-        $bg: $gray-1000;
+        $bg-start: #f5b11a;
+        $bg-end: #d6902a;
+        $bg-grad: linear-gradient($bg-start, $bg-end);
+        $bg: $bg-end;
         $neg-bg: $white;
         margin-left: -3rem;
         margin-right: -3rem;
-        background-color: $bg;
+        background: $bg;
         color: $white;
         text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.2); //box-shadow: 0em 0.5em 1em rgba(0, 0, 0, 0.2);
         >.col,
@@ -104,13 +115,11 @@
             color: inherit;
         }
         .heading-tech {
-            margin-bottom: 0.5em;
-            color: $tertiary;
+            margin-bottom: 0.5em; //color: $tertiary;
         }
         .heading-tested {
             margin-bottom: 0.6em;
-            font-size: 1em;
-            color: $primary;
+            font-size: 1em; //color: $primary;
         }
         .neg-space-col {
             padding: 0;
@@ -122,8 +131,9 @@
             }
         }
         @media (min-width: map-get($grid-breakpoints, sm)) {
-            box-shadow: 0.25em 0.25em 1em rgba(0, 0, 0, 0.5);
             margin-bottom: 1em;
+            background: $bg-grad;
+            box-shadow: 0.25em 0.25em 1em rgba(0, 0, 0, 0.25);
             .neg-space-col {
                 display: none;
                 +* {
@@ -183,6 +193,9 @@
         }
         p:last-child {
             margin-bottom: auto;
+        }
+        &.bg-alt-diagonal-white-primary>:nth-child(1n) {
+            padding-top: 3em;
         }
         > :nth-child(1n)>.row {
             text-align: center;

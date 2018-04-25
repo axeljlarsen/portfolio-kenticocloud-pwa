@@ -22,6 +22,8 @@ export class PortfolioItem extends ContentItem {
                         return 'publicItem';
                     case 'skyline_case_study_url':
                         return 'skylineCaseStudyUrl';
+                    case 'cta_button_service_url':
+                        return 'ctaUrl';
                     case 'tested_platforms':
                         return 'testedPlatforms';
                     case 'thumbnail_image':

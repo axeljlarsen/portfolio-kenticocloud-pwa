@@ -42,6 +42,7 @@ class Portfolio extends Component {
   }
 
   render() {
+    window.scrollTo(0, 0);
     let formatDate = (value, format) => {
       if (!format) format = 'mmmm d';
       return dateFormat(value, format);
@@ -76,33 +77,37 @@ class Portfolio extends Component {
 
       result.push(
         <div className={bootstrapVersion == 4 ? 'col' : 'col-xs-12' + ' col-sm-6 col-md-4 col-lg-3'} key={counter++}>
-          <div className="card card-portfolio-item h-100">
-            <Link to={link}>
-              <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
-            </Link>
-            <div className="card-body">
-              <h2 className="h4">
-                <Link to={link}>{title}</Link>
-              </h2>
-              <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
 
-            </div>
-            <div className="card-footer portfolioItem-tile-features">
-              {
-                portfolioItem.features.map((feature, index) => {
-                  if (feature) {
-                    let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
-                    let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
-                    return (
-                      <div className="align-middle text-center" key={index}>
-                        <img alt={featureImageDesc} className="img-responsive icon mr-2" src={featureImageUrl} title={featureImageDesc} />
-                        <span>{feature.caption.value}</span>
-                      </div>
-                    )
-                  }
-                })
-              }
-            </div>
+          <div className="card card-portfolio-item">
+            <Link to={link}>
+              <div className="portfolioItem-tile-image-wrapper">
+              <img alt={'PortfolioItem ' + title} className="portfolioItem-tile-image" src={imageUrl} title={'PortfolioItem ' + title} />
+
+              </div>
+              <div className="card-body">
+                <h2 className="h4">
+                  {title}
+                </h2>
+                <RichTextElement className={'portfolioItem-detail-content ' + ((description.value.length <= 3) ? 'd-none' : '')} element={description} />
+
+              </div>
+              <div className="card-footer portfolioItem-tile-features">
+                {
+                  portfolioItem.features.map((feature, index) => {
+                    if (feature) {
+                      let featureImageUrl = (feature.icon.value.length) ? feature.icon.value[0].url : '';
+                      let featureImageDesc = (feature.icon.value.length) ? feature.icon.value[0].description : '';
+                      return (
+                        <div className="align-middle text-center" key={index}>
+                          <img alt={featureImageDesc} className="img-responsive icon mr-2" src={featureImageUrl} title={featureImageDesc} />
+                          <span>{feature.caption.value}</span>
+                        </div>
+                      )
+                    }
+                  })
+                }
+              </div>
+            </Link>
           </div>
         </div>
       );

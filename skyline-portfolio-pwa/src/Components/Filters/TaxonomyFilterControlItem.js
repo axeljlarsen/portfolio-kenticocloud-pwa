@@ -33,8 +33,9 @@ class TaxonomyFilterControlItem extends Component {
     render() {
         let codename = this.props.term.codename;
         let name = this.props.term.name;
-        ////let checked = this.props.filter.techAndBusSkills.includes(codename);
-        let checked = this.props.filter[this.props.filterItemListName].includes(this.props.term);
+        let checked = this.props.filter.techAndBusSkills.includes(codename);
+        ////this might be necessary for modular content but doesn't work with taxonomy terms.
+        //let checked = this.props.filter[this.props.filterItemListName].includes(this.props.term);
 
         // let childTerms = this.props.term.terms.reduce((result, childTerm, index) => {
         //     // result.push(

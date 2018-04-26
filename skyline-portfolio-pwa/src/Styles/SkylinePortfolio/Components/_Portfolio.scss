@@ -1,4 +1,17 @@
 @import 'src/Styles/SkylinePortfolio/Variables';
+$service-cta-bg: #d6902a;
+@keyframes animate-cta-bg {
+    0% {
+        background-color: $service-cta-bg;
+    }
+    50% {
+        background-color: darken($service-cta-bg, 20%);
+    }
+    100% {
+        background-color: $service-cta-bg;
+    }
+}
+
 .portfolioItem-detail {
     h1 {
         font-size: 2em;
@@ -15,26 +28,26 @@
     }
     .portfolioItem-detail-image {
         position: relative;
+        min-height: 15rem;
+        height: 30vw;
         max-height: 40vh;
-        min-height: 20rem;
         overflow: hidden;
         @media (min-width: map-get($grid-breakpoints, sm)) {
-            min-height: 0;
+            //min-height: 0;
         }
         img {
             position: absolute;
             top: 50%;
             left: 50%;
             max-width: none;
-            height: 100%;
+            max-height: 105%;
             transform: translate(-50%, -50%);
             transform-origin: center;
             transition: top 1s, left 1s, transform 1s;
             @media (min-width: map-get($grid-breakpoints, sm)) {
-                position: relative;
-                max-width: 100%;
-                height: auto;
-                transform: translateX(-50%);
+                //position: relative;
+                max-width: 110%;
+                max-height: none; //transform: translateX(-50%);
             }
         }
     }
@@ -46,7 +59,7 @@
         padding-top: 3rem;
         padding-bottom: 6rem;
         padding-right: 4.5rem;
-        box-shadow: 0.5em -0.5em 1em rgba(0,0,0,0.05)
+        box-shadow: 0.5em -0.5em 1em rgba(0, 0, 0, 0.05)
     }
     .portfolioItem-detail-features {
         font-weight: $font-weight-light;
@@ -88,13 +101,13 @@
             margin-top: -1 * $shift;
         }
     }
-   
     .portfolioItem-detail-tech {
         $bg-start: #f5b11a;
         $bg-end: #d6902a;
         $bg-grad: linear-gradient($bg-start, $bg-end);
         $bg: $bg-end;
         $neg-bg: $white;
+        position: relative;
         margin-left: -3rem;
         margin-right: -3rem;
         background: $bg;
@@ -104,6 +117,10 @@
         >[class*="col-"] {
             padding-left: 3rem;
             padding-right: 3rem;
+            >.row>[class*="col-"],
+            >.row>.col {
+                min-height: 2em;
+            }
         }
         h1,
         h2,
@@ -185,6 +202,27 @@
                 }
             }
         }
+        .neg-space-col:last-child {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -50%;
+            .neg-space-shape {
+                background: transparent;
+                &:first-child:after {
+                    border-top-color: $bg;
+                    border-right-color: $bg;
+                    border-bottom-color: transparent;
+                    border-left-color: transparent;
+                }
+                &:last-child:after {
+                    border-top-color: $bg;
+                    border-right-color: transparent;
+                    border-bottom-color: transparent;
+                    border-left-color: $bg;
+                }
+            }
+        }
     }
     .portfolioItem-device-sections {
         img {
@@ -240,12 +278,67 @@
             }
         }
     }
+    .service-cta-wrapper .service-cta {
+        display: block;
+        padding: 2em 1.5rem;
+        font-size: 1.25em;
+        text-align: center;
+        background: $service-cta-bg;
+        margin: auto -1.5rem;
+        &:hover,
+        &:focus {
+            animation: animate-cta-bg;
+            animation-delay: 0;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        >.btn {
+            display: inline-flex;
+            align-content: center;
+            align-items: center;
+            border: 0;
+            padding: 0.5em 1em;
+            background: $primary;
+            color: rgba($secondary, 0.63);
+            background: #f5b11a;
+            color: #8d601b;
+            box-shadow: 0.25em 0.25em 0.5em rgba(0, 0, 0, 0.31);
+            border-radius: 2em;
+            transition: background 0.25s, box-shadow 0.25s;
+            &:hover,
+            &:focus {
+                box-shadow: 0.125em 0.125em 0.25em rgba(0, 0, 0, 0.31);
+            }
+            &:active {
+                background: darken($primary, 20%);
+                box-shadow: inset 0.125em 0.125em 0.25em rgba(0, 0, 0, 0.31);
+            }
+        }
+        .cta-service-name {
+            color: rgba(255, 255, 255, 0.84);
+            font-weight: 900;
+            font-size: 1.25em;
+            text-shadow: 0.1em 0.1em 0.1em rgba(0, 0, 0, 0.1);
+            margin: auto 0.25em;
+        }
+    }
 }
 
 .card-portfolio-item {
     >a {
         display: inline-block;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        color: inherit;
+        transition: background 0.33s;
+        &:focus {
+            background: rgba($primary, 0.2);
+        }
+        h2 {
+            color: $primary;
+        }
         /* 
         * The fix described by 'Comment IMG_0001' 
         * presents an issue regarding the border-radius of this
@@ -253,6 +346,10 @@
         * in order to fix it.
         */
         transform: translateZ(0);
+        .portfolioItem-tile-image-wrapper {
+            display: inline-block;
+            overflow: hidden;
+        }
         img.portfolioItem-tile-image {
             transition: transform 1s;
             /*

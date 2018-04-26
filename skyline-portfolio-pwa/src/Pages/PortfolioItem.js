@@ -54,10 +54,12 @@ class PortfolioItem extends Component {
     let launchDate = formatDate(portfolioItem.actualLaunchDate.value, 'mmmm yyyy');
     let description = portfolioItem.description;
     let caseStudy = portfolioItem.skylineCaseStudyUrl;
+    let ctaUrl = portfolioItem.ctaUrl;
     let clientInfo = (portfolioItem.client.length) ? portfolioItem.client[0] : null;
     let clientIndustry = (clientInfo && clientInfo.industries.taxonomyTerms.length) ? clientInfo.industries.taxonomyTerms[0].name : '';
     let subtitle = portfolioItem.subtitle.value;
     let lengthOfEngagement = portfolioItem.lengthOfEngagement.value;
+    let services = portfolioItem.services;
     let technologies = portfolioItem.technologies;
     let deviceSectionCount = portfolioItem.deviceSections.length;
 
@@ -67,7 +69,9 @@ class PortfolioItem extends Component {
     window.addEventListener('scroll', function () {
       var cta = document.querySelector('.cta');
       if (cta) {
-        if (window.scrollY > 100) {
+        var scrollY = window.scrollY || window.pageYOffset;
+
+        if (scrollY > 100) {
           cta.classList.add('cta-in-view');
         }
         else {
@@ -114,7 +118,6 @@ class PortfolioItem extends Component {
         <div className="portfolioItem-detail-image">
           <img alt={imageDesc} className="img-responsive" src={imageUrl} title={imageDesc} />
         </div>
-
         <div className="container-fluid">
           <div className={((bootstrapVersion == 4) ? '' : 'bg-cube shadow-light-inset') + ' row'}>
             <div className={((bootstrapVersion == 4) ? 'col-12 col-sm-7 offset-sm-1' : 'bg-white col-xs-12 col-sm-8') + ' portfolioItem-detail-summary'}>
@@ -140,7 +143,7 @@ class PortfolioItem extends Component {
                         return (
                           <tr key={index}>
                             <td className="align-middle text-center">
-                              <img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} />
+                              <span className="box"><img alt={featureImageDesc} className="img-responsive icon" src={featureImageUrl} title={featureImageDesc} /></span>
                             </td>
                             <td>
                               <span>{feature.caption.value}</span>
@@ -169,7 +172,7 @@ class PortfolioItem extends Component {
                           let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
                           return (
                             <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
-                              <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
+                              <span className="box"><img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} /></span>
                               <span>{technology.name.value}</span>
                             </div>
                           )
@@ -189,7 +192,7 @@ class PortfolioItem extends Component {
                           let technologyImageDesc = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].description : '';
                           return (
                             <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
-                              <img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} />
+                              <span className="box"><img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} /></span>
                               <span className="">{technology.name.value}</span>
                             </div>
                           )
@@ -271,6 +274,14 @@ class PortfolioItem extends Component {
                 }
               })
             }
+          </div>
+
+          <div className="row service-cta-wrapper">
+            <div className={((bootstrapVersion == 4) ? 'col' : 'col-xs-12')}>
+              <a className="service-cta" href={services.length > 0 ? ctaUrl.value : '/Solutions'}>
+                <span className="btn">Learn more about our {services.length > 0 ? <span className="cta-service-name">{services[0].name.value}</span> : ''} services</span>
+              </a>
+            </div>
           </div>
         </div>
       </portfolioItem >

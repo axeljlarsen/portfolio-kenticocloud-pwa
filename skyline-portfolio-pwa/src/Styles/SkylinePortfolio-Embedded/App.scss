@@ -17,6 +17,12 @@
     overflow: unset;
 }
 
+body.pwa-safari {
+    .webportfolio-embed .portfolio-list>[class*="col-"] {
+        flex: 1 0 auto;
+    }
+}
+
 .webportfolio-embed {
     margin: 0;
     padding: 0;

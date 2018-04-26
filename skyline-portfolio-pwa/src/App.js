@@ -8,6 +8,13 @@ import PortfolioItem from './Pages/PortfolioItem';
 import './Styles/SkylinePortfolio-Embedded/App.css';
 
 const App = (props) => {
+  let isSafari =  (/Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor));
+  if (isSafari) {
+    document.body.classList.add('pwa-safari');
+  }
+  else {
+    document.body.classList.add('pwa-not-safari');
+  }
   return (
     <div>
       <Switch>

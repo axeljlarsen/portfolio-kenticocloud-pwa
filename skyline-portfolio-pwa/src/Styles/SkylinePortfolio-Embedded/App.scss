@@ -16,7 +16,10 @@
     padding-right: 1.5rem;
     overflow: unset;
 }
-
+.container-fluid.webportfolio-embed > div > .row.bg-cube {
+    min-width: 100vw;
+    min-height: 100vh;
+}
 body.pwa-safari {
     .webportfolio-embed .portfolio-list>[class*="col-"] {
         flex: 1 0 auto;

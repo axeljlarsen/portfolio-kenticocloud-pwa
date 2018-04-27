@@ -123,7 +123,7 @@ export class Filter {
     }
 
     matches(portfolioItem) {
-        return this.matchesTechAndBusSkillsTaxonomy(portfolioItem) && this.matchesServicesTaxonomy(portfolioItem);
+        return this.matchesTechAndBusSkillsTaxonomy(portfolioItem) && this.matchesServicesTaxonomy(portfolioItem) && this.matchesFeatures(portfolioItem);
         //return this.matchesTechnologies(portfolioItem);
     }
 
@@ -157,11 +157,10 @@ export class Filter {
             portfolioItem.services.forEach(({services}) => 
                services.value.forEach(({codename}) =>
                     terms.push(codename)));
-            //terms.push(portfolioItem.services[0].services.value[0].codename);
             return this.services.some(x => terms.includes(x));
         }
 
-        return true;
+        return false;
     }
 
     matchesFeatures(portfolioItem) {
@@ -245,6 +244,14 @@ class PortfolioItemStore {
 
     getItems(count) {
         return items.slice(0, count);
+    }
+
+    getFilteredItems() {
+        return {
+            techAndBusSkills: techAndBusSkills,
+            services: services,
+            features: features
+        };
     }
 
     getTechAndBusSkills() {

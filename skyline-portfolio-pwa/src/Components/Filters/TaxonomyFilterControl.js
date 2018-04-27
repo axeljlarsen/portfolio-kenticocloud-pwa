@@ -5,6 +5,9 @@ import TaxonomyFilterControlItem from "./TaxonomyFilterControlItem";
 
 let getState = (props) => {
     return {
+        filterApplied: props.filterApplied || '',
+        buttonText: props.buttonText || 'Filter Items',
+        buttonTextModifier: props.buttonTextModifier || ''
     };
 };
 
@@ -12,7 +15,7 @@ class TaxonomyFilterControl extends Component {
     constructor(props) {
         super(props);
 
-        this.state = getState(props);        
+        this.state = getState(props);
 
         this.onChange = this.onChange.bind(this);
     }
@@ -26,8 +29,22 @@ class TaxonomyFilterControl extends Component {
         //PortfolioStore.removeChangeListener(this.onChange);
     }
 
-    onChange() {        
-        this.setState(getState());
+    onChildItemChange(terms) {
+        alert(terms.length);
+    }
+
+    onChange() {
+        let filteredItems = this.props.filter[this.props["filterItemListName"]];
+        let filterApplied = filteredItems.length > 0 ? 'filter-applied' : '';
+        let buttonText = this.state.buttonText
+        let buttonTextModifier = filteredItems.length > 0 ? ' (' + filteredItems.length + ')' : '';
+        this.setState(getState(
+            {
+                filterApplied: filterApplied,
+                buttonText: buttonText,
+                buttonTextModifier: buttonTextModifier
+            }));
+
     }
 
     render() {
@@ -45,19 +62,18 @@ class TaxonomyFilterControl extends Component {
         }
 
         let filterItems = this.props.availableFilterItems.map((term) => {
-            //term.codename = term.codename || term.system.codename;
-            //term.name = term.name || term.system.name;
-            //term.terms = term.terms || [{codename:term.codename, name:term.name}];
+            term.codename = term.codename || term.system.codename;
+            term.name = term.name || term.system.name;
 
             return (
-                <TaxonomyFilterControlItem term={term} filter={this.props.filter} filterItemListName={this.props.filterItemListName} availableFilterItems={this.props.availableFilterItems} filterToggleFunction={this.props.filterToggleFunction}  key={'filterItem_' + term.codename} />
+                <TaxonomyFilterControlItem parentControl={this} term={term} filter={this.props.filter} filterItemListName={this.props.filterItemListName} availableFilterItems={this.props.availableFilterItems} filterToggleFunction={this.props.filterToggleFunction} key={'filterItem_' + term.codename} />
             );
         });
 
 
         return (
             <div className="filter-control">
-                <button className="filter-control-btn" onClick={(e) => onFilterControlClick(e)} data-target={'#' + this.props.name}>{this.props.buttonText}</button>
+                <button className={'filter-control-btn ' + (this.state.filterApplied || this.props.filterApplied)} onClick={(e) => onFilterControlClick(e)} data-target={'#' + this.props.name}>{this.state.buttonText}{this.state.buttonTextModifier}</button>
                 <div id={this.props.name} className="filter-option-panel">
                     <ul className="filter-options">
                         {filterItems}

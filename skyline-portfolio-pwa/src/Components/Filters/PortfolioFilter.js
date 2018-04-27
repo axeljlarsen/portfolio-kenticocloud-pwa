@@ -43,15 +43,26 @@ class PortfolioFilter extends Component {
     if (availableTechSkills.length) {
       return (
         <div>
+        <TaxonomyFilterControl filter={filter}
+          filterItemListName="features"
+          availableFilterItems={availableFeatures}
+          filterToggleFunction={filter.toggleFeatures}
+          name="featureFilter"
+          buttonText="Select Features" />
+
           <TaxonomyFilterControl filter={filter}
             filterItemListName="techAndBusSkills"
             availableFilterItems={availableTechSkills}
             filterToggleFunction={filter.toggleTechAndBusSkills}
             name="techFilter"
             buttonText="Select Tech Used" />
-
-          {/* <TaxonomyFilter filter={filter} availableFilterItems={availableFeatures} filterToggleFunction={filter.toggleFeatures} name="featureFilter" buttonText="Select Features" /> */}
-          {/* <TaxonomyFilter filter={filter} availableFilterItems={availableServices} filterToggleFunction={filter.toggleServices} name="serviceFilter" buttonText="Select Service" /> */}
+         
+          <TaxonomyFilterControl filter={filter}
+            filterItemListName="services"
+            availableFilterItems={availableServices}
+            filterToggleFunction={filter.toggleServices}
+            name="serviceFilter"
+            buttonText="Select Service" />
         </div>
       );
     }

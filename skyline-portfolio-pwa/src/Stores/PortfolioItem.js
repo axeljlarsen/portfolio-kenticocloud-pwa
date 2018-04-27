@@ -10,6 +10,7 @@ let changeListeners = [];
 let techAndBusSkills = [];
 let services = [];
 let features = [];
+let filteredFields = [[]];
 let notifyChange = () => {
     changeListeners.forEach((listener) => {
         listener();
@@ -120,11 +121,30 @@ export class Filter {
         this.techAndBusSkills = [];
         this.services = [];
         this.features = [];
+        this.filteredFields = [];
     }
 
     matches(portfolioItem) {
-        return this.matchesTechAndBusSkillsTaxonomy(portfolioItem) && this.matchesServicesTaxonomy(portfolioItem) && this.matchesFeatures(portfolioItem);
+        return this.matchesFields(portfolioItem) && this.matchesTechAndBusSkillsTaxonomy(portfolioItem) && this.matchesServicesTaxonomy(portfolioItem) && this.matchesFeatures(portfolioItem);
         //return this.matchesTechnologies(portfolioItem);
+    }
+
+    matchesFields(portfolioItem) {
+        //if (this.filteredFields.length == 0) {
+        //    return true;
+        //}
+        let that = this;
+
+        let foundMatch = false;
+        that.filteredFields.forEach((field) => {
+            //field.forEach((value) => {
+            //    if (value && value.length > 0) {
+                    //that.filteredFields[field] = value;    
+                    foundMatch = field[1] == portfolioItem[field[0]].value ? true : foundMatch;
+            //    }
+            //});
+        });
+        return foundMatch;
     }
 
     matchesTechAndBusSkillsTaxonomy(portfolioItem) {

@@ -21,6 +21,9 @@ body.pwa-safari {
     .webportfolio-embed .portfolio-list>[class*="col-"] {
         flex: 1 0 auto;
     }
+    .webportfolio-embed .cta.cta-in-view {
+        bottom: 5em;
+    }
 }
 
 .webportfolio-embed {

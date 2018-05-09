@@ -87,16 +87,16 @@ body.pwa-safari {
                 }
             }
         }
-        &:hover {
-            a {
-                background-color: $primary; //darken($primary,20);
-                box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.5);
-                color: $secondary;
-                svg path {
-                    fill: $secondary;
-                }
-            }
-        }
+        // &:hover {
+        //     a {
+        //         background-color: $primary; //darken($primary,20);
+        //         box-shadow: 0.1em 0.1em 1em rgba(0, 0, 0, 0.5);
+        //         color: $secondary;
+        //         svg path {
+        //             fill: $secondary;
+        //         }
+        //     }
+        // }
     }
     .masonry {
         display: block;
@@ -253,7 +253,7 @@ body.pwa-safari {
             max-width: 100%;
             padding: 0;
             margin: auto;
-        }
+        } 
     }
     /* ADDITIONAL STYLE CHANGES FOR EMBEDDED VERSION */
     .portfolio-list {

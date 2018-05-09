@@ -84,7 +84,7 @@ $service-cta-bg: #d6902a;
         border-radius: 2em;
         box-shadow: 0.1em 0.2em 0.2em rgba(0, 0, 0, 0.15);
         transition: background 0.3s, box-shadow 0.3s;
-        &:hover,
+        //&:hover,
         &:focus {
             box-shadow: 0.15em 0.25em 0.4em rgba(0, 0, 0, 0.3);
         }
@@ -285,7 +285,7 @@ $service-cta-bg: #d6902a;
         text-align: center;
         background: $service-cta-bg;
         margin: auto -1.5rem;
-        &:hover,
+        //&:hover,
         &:focus {
             animation: animate-cta-bg;
             animation-delay: 0;
@@ -306,7 +306,7 @@ $service-cta-bg: #d6902a;
             box-shadow: 0.25em 0.25em 0.5em rgba(0, 0, 0, 0.31);
             border-radius: 2em;
             transition: background 0.25s, box-shadow 0.25s;
-            &:hover,
+            //&:hover,
             &:focus {
                 box-shadow: 0.125em 0.125em 0.25em rgba(0, 0, 0, 0.31);
             }
@@ -324,35 +324,38 @@ $service-cta-bg: #d6902a;
         }
     }
 }
-
+a.card-portfolio-item {
+    color: inherit;
+}
 .card-portfolio-item {
-    >a {
-        display: inline-block;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        color: inherit;
-        transition: background 0.33s;
-        &:focus {
-            background: rgba($primary, 0.2);
-        }
-        h2 {
-            color: $primary;
-        }
-        /* 
+    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    min-height: 40rem;
+    height: 100%;
+    color: inherit;
+    transition: background 0.33s;
+    &:focus {
+        background: rgba($primary, 0.2);
+    }
+    h2 {
+        color: $primary;
+    }
+    /* 
         * The fix described by 'Comment IMG_0001' 
         * presents an issue regarding the border-radius of this
         * element's parent. Set translateZ(0) for the transform property
         * in order to fix it.
         */
-        transform: translateZ(0);
-        .portfolioItem-tile-image-wrapper {
-            display: inline-block;
-            overflow: hidden;
-        }
-        img.portfolioItem-tile-image {
-            transition: transform 1s;
-            /*
+    transform: translateZ(0);
+    .portfolioItem-tile-image-wrapper {
+        display: inline-block;
+        overflow: hidden;
+    }
+    img.portfolioItem-tile-image {
+        transition: transform 1s;
+        /*
             * Comment IMG_0001
             * The following properties are all needed to resolve
             * a bizarre issue when img element's are scaled via
@@ -361,15 +364,10 @@ $service-cta-bg: #d6902a;
             * will vanish. This also fixes a blur effect that occurs
             * to img elements that finish scaling up.
             */
-            -webkit-backface-visibility: hidden;
-            -ms-transform: translateZ(0);
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            &:hover {
-                transform-origin: center;
-                transform: scale(1.25);
-            }
-        }
+        -webkit-backface-visibility: hidden;
+        -ms-transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
     }
     .portfolioItem-tile-date {
         display: inline-block;
@@ -380,6 +378,10 @@ $service-cta-bg: #d6902a;
     }
 }
 
+.pwa-not-safari .card-portfolio-item:hover .portfolioItem-tile-image {
+    transform-origin: center;
+    transform: scale(1.25);
+}
 /*
 // PARALLAX EFFECT ATTEMPTS
 .portfolioItem-detail .portfolioItem-detail-image {

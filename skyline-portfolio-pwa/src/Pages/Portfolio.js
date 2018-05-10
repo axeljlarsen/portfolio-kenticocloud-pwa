@@ -5,7 +5,7 @@ import Link from '../Components/LowerCaseUrlLink';
 import dateFormat from 'dateformat';
 import RichTextElement from '../Components/RichTextElement';
 
-let portfolioItemCount = 10;
+let portfolioItemCount = 100;
 let bootstrapVersion = 3;
 
 let getState = () => {

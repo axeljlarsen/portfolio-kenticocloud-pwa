@@ -2,3 +2,5 @@
 [0730/220342:ERROR:node_debugger.cc(86)] Cannot start debugger server
 [0504/143004.365:ERROR:crash_report_database_win.cc(427)] unexpected header
 [0509/092822.093:ERROR:crash_report_database_win.cc(427)] unexpected header
+[0511/144058.058:ERROR:crash_report_database_win.cc(427)] unexpected header
+[0511/153610.923:ERROR:crash_report_database_win.cc(427)] unexpected header

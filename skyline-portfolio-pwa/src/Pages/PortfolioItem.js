@@ -107,6 +107,48 @@ class PortfolioItem extends Component {
     //   parallaxFloat();
     // });
 
+    let technologiesUsedSection = portfolioItem.technologies.length ? (
+      <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12')}>
+        <h3 className="heading heading-tech">Technologies Used</h3>
+        <div className="row">
+          {
+            portfolioItem.technologies.map((technology, index) => {
+              if (technology) {
+                let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
+                let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
+                return (
+                  <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
+                    <span className="box"><img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} /></span>
+                    <span>{technology.name.value}</span>
+                  </div>
+                )
+              }
+            })
+          }
+        </div>
+      </div>) : null;
+
+    let designedTestedForSection = portfolioItem.testedPlatforms.length ? (
+      <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' mt-3 mb-5'}>
+        <h3 className="heading heading-tested text-small">Designed and Tested For</h3>
+        <div className="row">
+          {
+            portfolioItem.testedPlatforms.map((technology, index) => {
+              if (technology) {
+                let technologyImageUrl = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].url : '';
+                let technologyImageDesc = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].description : '';
+                return (
+                  <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
+                    <span className="box"><img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} /></span>
+                    <span className="">{technology.name.value}</span>
+                  </div>
+                )
+              }
+            })
+          }
+        </div>
+      </div>
+    ) : null;
 
     return (
       <portfolioItem className="portfolioItem-detail portfolioItem-detail-related-box">
@@ -164,45 +206,9 @@ class PortfolioItem extends Component {
             <div className={((bootstrapVersion == 4) ? 'col col-sm-10 offset-sm-1 py-0' : 'col-xs-12 col-sm-10 col-sm-offset-1 py-0')}>
               <div className="row portfolioItem-detail-tech">
                 <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' neg-space-col'}><div className="neg-space-shape"></div><div className="neg-space-shape"></div></div>
-                <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12')}>
-                  <h3 className="heading heading-tech">Technologies Used</h3>
-                  <div className="row">
-                    {
-                      portfolioItem.technologies.map((technology, index) => {
-                        if (technology) {
-                          let technologyImageUrl = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].url : '';
-                          let technologyImageDesc = (technology.colorWithDropShadowIcon.value.length) ? technology.colorWithDropShadowIcon.value[0].description : '';
-                          return (
-                            <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
-                              <span className="box"><img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} /></span>
-                              <span>{technology.name.value}</span>
-                            </div>
-                          )
-                        }
-                      })
-                    }
-                  </div>
-                </div>
+                {technologiesUsedSection}
+                {designedTestedForSection}
 
-                <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' mt-3 mb-5'}>
-                  <h3 className="heading heading-tested text-small">Designed and Tested For</h3>
-                  <div className="row">
-                    {
-                      portfolioItem.testedPlatforms.map((technology, index) => {
-                        if (technology) {
-                          let technologyImageUrl = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].url : '';
-                          let technologyImageDesc = (technology.whiteWithDropShadowIcon.value.length) ? technology.whiteWithDropShadowIcon.value[0].description : '';
-                          return (
-                            <div className={((bootstrapVersion == 4) ? 'col-6' : 'col-xs-6') + ' col-sm-4 col-lg-3 mb-2'} key={index}>
-                              <span className="box"><img alt={technologyImageDesc} className="img-responsive icon" src={technologyImageUrl} title={technologyImageDesc} /></span>
-                              <span className="">{technology.name.value}</span>
-                            </div>
-                          )
-                        }
-                      })
-                    }
-                  </div>
-                </div>
                 <div className={((bootstrapVersion == 4) ? 'col-12' : 'col-xs-12') + ' neg-space-col'}><div className="neg-space-shape"></div><div className="neg-space-shape"></div></div>
               </div>
             </div>

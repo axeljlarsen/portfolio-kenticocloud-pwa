@@ -2,11 +2,8 @@
   "name": "pwa-experiment",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "dateformat": "^2.0.0",
-    "react-scripts": "0.9.0"
-  },
   "dependencies": {
+    "dateformat": "^2.0.0",
     "immutable": "^3.8.2",
     "kentico-cloud-delivery-typescript-sdk": "2.0.1",
     "localforage": "^1.5.0",

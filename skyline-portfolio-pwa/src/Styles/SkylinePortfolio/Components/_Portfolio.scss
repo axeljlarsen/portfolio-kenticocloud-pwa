@@ -83,8 +83,7 @@ $service-cta-bg: #d6902a;
         margin-bottom: 1em;
         border-radius: 2em;
         box-shadow: 0.1em 0.2em 0.2em rgba(0, 0, 0, 0.15);
-        transition: background 0.3s, box-shadow 0.3s;
-        //&:hover,
+        transition: background 0.3s, box-shadow 0.3s; //&:hover,
         &:focus {
             box-shadow: 0.15em 0.25em 0.4em rgba(0, 0, 0, 0.3);
         }
@@ -99,6 +98,8 @@ $service-cta-bg: #d6902a;
         }
         .portfolioItem-detail-tech {
             margin-top: -1 * $shift;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
         }
     }
     .portfolioItem-detail-tech {
@@ -143,7 +144,7 @@ $service-cta-bg: #d6902a;
             @media (min-width: map-get($grid-breakpoints, sm)) {
                 display: none;
                 +* {
-                    margin-top: 3rem;
+                    //margin-top: 3rem;
                 }
             }
         }
@@ -154,7 +155,7 @@ $service-cta-bg: #d6902a;
             .neg-space-col {
                 display: none;
                 +* {
-                    margin-top: 3rem;
+                    //margin-top: 3rem;
                 }
             }
         }
@@ -276,6 +277,14 @@ $service-cta-bg: #d6902a;
             .phone-text_only+.phone-text_only {
                 margin-top: -5vh;
             }
+            .phone-text_only:first-child {
+                margin-left: 12.5%;
+                margin-right: 6.25%;
+                right: auto;
+            }
+            .phone-text_only:first-child+.phone-text_only {
+                right: auto;
+            }
         }
     }
     .service-cta-wrapper .service-cta {
@@ -284,8 +293,7 @@ $service-cta-bg: #d6902a;
         font-size: 1.25em;
         text-align: center;
         background: $service-cta-bg;
-        margin: auto -1.5rem;
-        //&:hover,
+        margin: auto -1.5rem; //&:hover,
         &:focus {
             animation: animate-cta-bg;
             animation-delay: 0;
@@ -305,8 +313,7 @@ $service-cta-bg: #d6902a;
             color: #8d601b;
             box-shadow: 0.25em 0.25em 0.5em rgba(0, 0, 0, 0.31);
             border-radius: 2em;
-            transition: background 0.25s, box-shadow 0.25s;
-            //&:hover,
+            transition: background 0.25s, box-shadow 0.25s; //&:hover,
             &:focus {
                 box-shadow: 0.125em 0.125em 0.25em rgba(0, 0, 0, 0.31);
             }
@@ -324,9 +331,11 @@ $service-cta-bg: #d6902a;
         }
     }
 }
+
 a.card-portfolio-item {
     color: inherit;
 }
+
 .card-portfolio-item {
     display: inline-block;
     display: flex;
@@ -382,6 +391,7 @@ a.card-portfolio-item {
     transform-origin: center;
     transform: scale(1.25);
 }
+
 /*
 // PARALLAX EFFECT ATTEMPTS
 .portfolioItem-detail .portfolioItem-detail-image {

@@ -5,11 +5,11 @@
 //@import 'src/Styles/_Bootstrap-4.0.0/scss/bootstrap';
 //@import 'src/Styles/SkylinePortfolio/Components/Components';
 .webportfolio-embed [class*="col-"] {
-    padding-top: 0;
+    padding-top: 0; 
     padding-bottom: 0;
 }
-
-@import 'src/Styles/SkylinePortfolio/Components/Portfolio';
+ 
+@import 'src/Styles/SkylinePortfolio/Components/Portfolio'; 
 @import 'src/Styles/SkylinePortfolio/Components/Filters';
 .container-fluid.webportfolio-embed {
     padding-left: 1.5rem;
@@ -17,7 +17,7 @@
     overflow: unset;
 }
 
-body.pwa-safari {
+body.pwa-safari { 
     .webportfolio-embed .portfolio-list>[class*="col-"] {
         flex: 1 0 auto;
     }
